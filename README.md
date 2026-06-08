@@ -1,46 +1,51 @@
 # AISkill
 
-Kho nay tap trung cac ERP skill vao mot git repository chung de:
+AISkill la kho chua cac ERP skill dung chung cho Codex va AI agent, tap trung vao cac bai toan phan tich, review, thiet ke, implementation, va test specification trong du an ERP kieu Nhat.
 
-- quan ly version de dang
-- tai su dung skill nhat quan
-- refactor skill theo cung mot chuan
-- de chaining giua BA, QA, Estimation, va Basic Design
+Muc tieu cua repo:
 
-## Cau truc repo
+- quan ly version skill tap trung
+- tai su dung skill nhat quan giua nhieu du an
+- standardize cau truc va chat luong skill
+- toi uu cho chaining giua BA, QA, Estimation, Design, Implementation, va Testing
+- giu moi skill de doc, de maintain, de mo rong
+
+## Repo Structure
 
 ```text
 skills/
   basic-design/
   business-analysis/
-  erp-skill-standardization/
   estimation/
+  feature-implementation/
   qa/
+  tsc-generation/
 ```
 
-Moi skill la mot thu muc doc lap, thuong gom:
+Moi skill la mot thu muc doc lap. Cau truc thuong gap:
 
-- `SKILL.md`: huong dan chinh cua skill
-- `agents/openai.yaml`: metadata hien thi va prompt mac dinh
-- `references/`: tai lieu tham chieu chi nap khi can
-- `scripts/`: script ho tro, neu skill can xu ly co tinh lap lai
+- `SKILL.md`: huong dan chinh, workflow, constraints, va quality gate
+- `agents/openai.yaml`: metadata hien thi va default prompt
+- `references/`: tai lieu tham chieu, template, output structure, rules
+- `scripts/`: script ho tro cho cac tac vu lap lai hoac can tinh on dinh
 
-## Danh sach skill
+## Skill Catalog
 
-| Skill | Muc dich | Dung khi |
+| Skill | Vai tro chinh | Dung khi nao |
 | --- | --- | --- |
-| `business-analysis` | Phan tich requirement ERP theo huong evidence-first | Can tai dung he thong dang lam gi, se thay doi gi, va tong hop phan tich cho BA, SA, Dev, QA, Architect |
-| `qa` | Review dac ta ERP theo goc nhin BA Nhat | Can tao QA gia tri cao, tim gap nghiep vu, state, downstream risk, concurrency, audit |
-| `estimation` | Tach task estimation ERP theo bang chung | Can phan ra Big/Medium/Small task ma khong doan logic va khong estimate man-day |
-| `basic-design` | Tao workbook Basic Design kieu MA | Can tao tai lieu thiet ke co cau truc Excel theo phong cach MA |
-| `erp-skill-standardization` | Review va refactor skill ERP | Can chuan hoa mot skill hien co thanh ban enterprise-ready de de maintain va chaining |
+| `business-analysis` | phan tich requirement ERP theo huong evidence-first | can tai dung he thong dang lam gi, logic hien tai la gi, se thay doi gi, va tong hop phan tich cho BA, SA, Dev, QA, Estimation, Architect |
+| `qa` | review dac ta ERP theo goc nhin BA Nhat cap cao | can tim business gap, missing state, missing condition, downstream risk, concurrency risk, audit risk, production risk |
+| `estimation` | tach task estimation ERP theo bang chung | can phan ra Big, Medium, Small task theo work package ma khong doan logic va khong estimate man-day |
+| `basic-design` | tao hoac cap nhat workbook Basic Design kieu MA | can sinh file `.xlsx` review-ready theo format Basic Design cua du an Nhat |
+| `feature-implementation` | implement feature ERP tren codebase hien co | can di tu requirement, QA, design, source investigation, impact analysis den code change va test ma khong doan logic |
+| `tsc-generation` | sinh Test Specification Case chi tiet | can tao TSC execute duoc truc tiep, co matrix coverage, test data, boundary, regression, va quality gate |
 
-## Cach dung nhanh
+## Suggested Usage
 
-Dung ten skill theo dang `$skill-name` trong prompt. Vi du:
+Goi skill bang ten `$skill-name` trong prompt. Vi du:
 
 ```text
-Use $business-analysis to analyze the provided ERP requirement, flow, and design documents.
+Use $business-analysis to analyze the provided ERP requirement, design, flow, and source artifacts.
 ```
 
 ```text
@@ -48,61 +53,85 @@ Use $qa to review the provided ERP documents and output only high-value QA.
 ```
 
 ```text
-Use $estimation to produce an evidence-based Big/Medium/Small task breakdown in Vietnamese.
+Use $estimation to produce an evidence-based Big/Medium/Small ERP task breakdown in Vietnamese.
 ```
 
 ```text
-Use $basic-design to create an MA-style Basic Design workbook from the requirement inputs.
+Use $basic-design to create an MA-style Basic Design workbook from the provided requirement inputs.
 ```
 
 ```text
-Use $erp-skill-standardization to refactor the provided ERP skill into an enterprise-ready standard structure.
+Use $feature-implementation to implement the ERP feature from the provided requirement, QA, design, and source artifacts.
 ```
 
-## Goi y chaining
+```text
+Use $tsc-generation to generate a detailed ERP Test Specification Case from the provided requirement, design, source, and project TSC sample.
+```
 
-Day la flow goi y de dung skill lien hoan:
+## Suggested Chaining
+
+Tuy theo muc tieu, co the dung skill theo cac flow sau.
+
+### 1. Requirement to review flow
 
 1. `business-analysis`
 2. `qa`
 3. `estimation`
-4. `basic-design`
 
-Neu can nang cap hoac dong bo lai chat luong skill, dung:
+### 2. Requirement to design flow
 
-1. `erp-skill-standardization`
+1. `business-analysis`
+2. `qa`
+3. `basic-design`
 
-## Nguyen tac dung skill
+### 3. Requirement to implementation flow
 
-- Uu tien evidence-first
-- Neu thieu bang chung, ghi ro `NOT FOUND IN DOCUMENT`
-- Khong doan logic, khong tu them flow, status, API, table, validation
-- Chi nap them file trong `references/` khi thuc su can
-- Giu `SKILL.md` gon, dua noi dung tham chieu dai sang `references/`
+1. `business-analysis`
+2. `qa`
+3. `feature-implementation`
 
-## Quy uoc dat ten skill
+### 4. Requirement to testing flow
 
-- Dung lowercase va hyphen-case
-- Ten thu muc phai trung voi `name:` trong `SKILL.md`
-- Ten hien thi cho nguoi dung nam trong `agents/openai.yaml`
+1. `business-analysis`
+2. `qa`
+3. `tsc-generation`
 
-## Khi them hoac sua skill
+## Shared Principles
+
+Tat ca skill trong repo nay uu tien cac nguyen tac sau:
+
+- evidence-first
+- khong doan logic
+- khong tu them flow, state, table, API, validation, permission, message
+- neu thieu bang chung thi ghi ro `NOT FOUND IN DOCUMENT`, `NOT FOUND IN REQUIREMENT`, hoac thong diep tuong ung theo rule cua skill
+- uu tien partial but correct hon la complete but guessed
+- giu `SKILL.md` gon, day noi dung dai sang `references/` khi phu hop
+- output phai huu ich de dung tiep, khong chi de doc
+
+## Naming Convention
+
+- ten skill dung lowercase va hyphen-case
+- ten thu muc phai trung voi `name:` trong `SKILL.md`
+- ten hien thi cho UI nam trong `agents/openai.yaml`
+- chi tao `scripts/`, `references/`, `assets/` khi thuc su can
+
+## When Adding Or Updating A Skill
 
 Checklist toi thieu:
 
-1. Tao thu muc moi trong `skills/`
-2. Tao `SKILL.md` voi `name` va `description` ro rang
-3. Them `agents/openai.yaml`
-4. Tach tai lieu dai sang `references/` neu can
-5. Cap nhat lai README nay
+1. Tao hoac cap nhat thu muc trong `skills/`
+2. Dam bao `SKILL.md` co `name` va `description` ro rang
+3. Them hoac cap nhat `agents/openai.yaml`
+4. Tach rule, template, output format dai sang `references/` neu can
+5. Bo sung `scripts/` neu co phan xu ly lap lai can tinh on dinh
+6. Cap nhat README nay neu repo structure hoac skill catalog thay doi
 
-## Muc tieu cua repo nay
+## Repository Intent
 
-Repo nay uu tien cac skill:
+Repo nay khong chi la noi luu prompt. Day la bo skill ERP huong enterprise, duoc thiet ke de:
 
-- de doc
-- de bao tri
-- de mo rong
-- de reuse
-- de chaining
-- toi uu cho Codex va AI agent
+- giup Codex tai lap quy trinh lam viec on dinh
+- giam kha nang hallucination trong bai toan ERP
+- de mo rong thanh workflow chaining giua cac phase
+- de review va refactor skill theo mot chuan chung
+- de dung lai tren nhieu du an va nhieu artifact khac nhau

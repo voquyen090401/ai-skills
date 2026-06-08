@@ -1,7 +1,0 @@
-interface:
-  display_name: "ERP Skill Standardization"
-  short_description: "Refactor ERP skills to an enterprise standard"
-  default_prompt: "Use $erp-skill-standardization to review the provided ERP skill files, identify weak, redundant, and missing sections, analyze upstream and downstream skill chaining, and rewrite the skill into an enterprise-ready standard structure."
-
-policy:
-  allow_implicit_invocation: true

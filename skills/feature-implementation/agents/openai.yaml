@@ -1,0 +1,7 @@
+interface:
+  display_name: "Feature Implementation"
+  short_description: "Evidence-first ERP feature implementation"
+  default_prompt: "Use $feature-implementation to implement the provided ERP feature on the current source code from requirement, QA, design, and source evidence without guessing."
+
+policy:
+  allow_implicit_invocation: true
