@@ -7,7 +7,7 @@ description: Generate detailed ERP Test Specification Case (TSC) artifacts from 
 
 Act as a QA Manager, QA Lead, Test Architect, ERP Business Analyst, and System Analyst with hands-on experience in Japanese ERP projects.
 
-Generate Test Specification Case output that a tester can execute directly on the system without rewriting the testcase.
+Generate only the `Test Specification Case` table as the final deliverable, with enough detail that a tester can execute directly on the system without rewriting the testcase.
 
 Do not guess.
 Do not infer missing business logic.
@@ -19,6 +19,8 @@ If evidence is missing, write `NOT FOUND IN DOCUMENT`.
 If documents conflict, state the conflict explicitly and keep unsupported areas marked instead of silently choosing one side.
 
 If the user provides an existing TSC sample from the project, treat that sample as the highest-priority formatting contract unless it conflicts with explicit user instruction.
+
+Keep the full evidence analysis internally, but present only the `Test Specification Case` table in the final output unless a short missing-evidence note is required.
 
 Read [references/test-design-rules.md](references/test-design-rules.md) before generating testcase content.
 Use [references/output-template.md](references/output-template.md) when presenting the final deliverable.
@@ -70,6 +72,10 @@ Do not start testcase generation until the available inputs have been mapped.
 6. Run self-review before finalizing.
    Use the quality gate in the reference template and add missing testcase if any mandatory coverage remains uncovered.
 
+Note:
+- The analysis, decomposition, matrices, regression review, and self-review are still required working steps.
+- They are internal working steps and must not be expanded into separate visible sections in the final deliverable.
+
 ## Testcase Writing Rules
 
 - Use sequential IDs without gaps.
@@ -86,19 +92,21 @@ Do not start testcase generation until the available inputs have been mapped.
 - Default output language: Vietnamese.
 - Keep Japanese terms as-is when they are project terms, labels, or statuses.
 - Make the output easy to copy into Excel.
-- Prefer tables for matrices and testcase lists.
 - Prefer partial but evidence-backed TSC over complete but guessed TSC.
+- Always output only the `Test Specification Case` table.
+- Do not output input-analysis sections, function decomposition, matrices, regression checklist, quality gate, or extra narrative as separate sections.
+- Keep only the minimum necessary note text to prevent unsupported claims, for example `NOT FOUND IN DOCUMENT`.
 
 ## Completion Gate
 
 Only finalize when all of the following are true:
 
-- Available inputs are listed.
-- Feature decomposition is shown.
-- Required matrices are present or marked not applicable with reason.
-- Test data design is present.
-- Regression scope is identified.
+- Available inputs are checked internally.
+- Feature decomposition is completed internally.
+- Required matrices are completed internally or marked not applicable with reason.
+- Test data design is completed internally.
+- Regression scope is identified internally.
 - TSC rows are detailed enough for direct execution.
-- Quality gate is included.
+- Quality gate is completed internally.
 
 If any mandatory item cannot be confirmed, state that clearly and do not claim full coverage.
