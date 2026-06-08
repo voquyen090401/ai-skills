@@ -1,0 +1,4 @@
+interface:
+  display_name: "Elite ERP BA QA"
+  short_description: "Break ERP specs before development"
+  default_prompt: "Use $japanese-erp-qa to review the provided ERP documents as an elite Japanese BA reviewer and output only QA đạt điểm 4 hoặc 5, grouped by the mandatory sections."

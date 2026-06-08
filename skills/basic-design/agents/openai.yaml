@@ -1,0 +1,4 @@
+interface:
+  display_name: "MA Basic Design Workbook"
+  short_description: "Create MA-style Basic Design Excel workbooks"
+  default_prompt: "Use $ma-basic-design-workbook to create an MA-style Basic Design workbook from the requirement inputs and MA sample files."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "ERP Estimation Breakdown"
+  short_description: "Evidence-first ERP task breakdown in Vietnamese"
+  default_prompt: "Use $erp-estimation-breakdown to analyze the provided ERP documents and produce an evidence-based Big/Medium/Small estimation task breakdown in Vietnamese. Keep tasks at estimation work-package level, merge tightly related actions, and avoid micro-level coding-step splitting."
+
+policy:
+  allow_implicit_invocation: true

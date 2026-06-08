@@ -1,0 +1,7 @@
+interface:
+  display_name: "Business Analysis"
+  short_description: "Deep evidence-first ERP requirement analysis"
+  default_prompt: "Use $business-analysis to analyze the provided ERP requirement and design artifacts, cross-check the evidence, and produce a complete Vietnamese requirement analysis without guessing."
+
+policy:
+  allow_implicit_invocation: true
