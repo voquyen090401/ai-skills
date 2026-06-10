@@ -1,6 +1,6 @@
 ---
 name: qa
-description: Use this skill when the user wants QA questions, requirement confirmation, test scenarios, test cases, regression scope, or UAT preparation. If the user says only `QA`, `viet QA`, `lam QA`, or similar shorthand, default to this skill unless they explicitly ask for code, design, or TSC instead. It covers QA generation, customer confirmation questions, requirement clarification questions, test scenario generation, test case generation, expected result definition, regression scope analysis, and UAT preparation. Do not use it to perform business analysis, generate code, or create design.
+description: Use this skill when the user wants QA, customer confirmation questions, requirement clarification questions, or analysis points to ask the customer. If the user says only `QA`, `viet QA`, `lam QA`, or similar shorthand, default to this skill unless they explicitly ask for code, design, TSC, estimation, or impact analysis instead. It covers QA generation, customer confirmation questions, requirement clarification questions, analysis points, assumptions to confirm, and missing information detection. Do not use it to generate code, create design, or create TSC.
 ---
 
 # QA
@@ -19,62 +19,61 @@ Rules:
 - Keep traceability with previous skill outputs.
 - Output must be compatible with the next skill in the ERP Delivery Pipeline.
 
-Focus on test design and regression scope.
+Focus on customer confirmation questions and clarification analysis.
 
 ## Inputs
 
+- User Request
 - Requirement
-- Impact
-- Design
-- Code Review Findings
+- Screen Definition
+- Flow
+- Existing Analysis if available
 
 ## Outputs
 
 ```md
-## Test Strategy
+## QA Purpose
 
-## Test Scenarios
+## Customer Questions
 
-## Test Cases
+## Analysis Points
 
-| ID | Scenario | Preconditions | Steps | Expected Result | Type | Priority |
+## Assumptions To Confirm
 
-## Regression Scope
-
-## Coverage Matrix
+## Evidence
 
 ## Missing Information
 ```
 
 ## Dependencies
 
-- requirement and impact understanding
-- design or implementation review evidence
+- user request or requirement context
+- any available supporting business artifacts
 
 ## Next Skill
 
-`tsc-generation`
+`impact-analysis`
 
 ## Workflow
 
-1. Build test strategy from requirement and impact.
-2. Define scenarios from affected flows and business rules.
-3. Define test cases with clear preconditions, steps, and expected results.
-4. Define regression scope from impact and review findings.
+1. Read the user request and any available requirement context.
+2. Identify missing business rules, scope gaps, unclear flows, and confirmation points.
+3. Write concrete QA questions the user can send to the customer.
+4. Add analysis points and assumptions that still need confirmation.
+5. Keep each question traceable to available evidence.
 
 ## Stop Conditions
 
-- requirement understanding is missing
-- impact scope is missing
-- expected results cannot be supported by evidence
+- no usable request context exists
+- evidence is too weak to justify any safe confirmation question
 
 ## Quality Gates
 
-- `Test Scenarios` exists
-- `Regression Scope` exists
-- `Coverage Matrix` exists
+- `Customer Questions` exists
+- `Analysis Points` exists
+- `Evidence` exists
 
 ## Rules
 
-- Use `TEST-xxx` identifiers when a stable trace ID is needed.
-- Do not create unsupported test logic.
+- Use `QA-xxx` identifiers when a stable trace ID is needed.
+- Do not invent customer answers or unsupported business rules.

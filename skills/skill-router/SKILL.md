@@ -165,18 +165,17 @@ Use when the user wants:
 
 Route:
 
-`business-analysis`
--> `impact-analysis`
--> `qa`
+`qa`
 
 Use when the user wants:
 
 - QA
 - standalone QA shorthand such as `viet QA`, `lam QA`, `tao QA`, `QA cho toi`
-- testcase
-- test scenario
-- regression scope
-- confirm requirement for testing
+- customer confirmation questions
+- requirement clarification questions
+- confirmation mail content
+- confirmation points to ask customer
+- assumptions to confirm with customer
 
 ### TSC Intent
 
@@ -190,6 +189,15 @@ Route:
 If the user already provides enough Requirement, Basic Design, Source, and QA:
 
 `tsc-generation`
+
+Use when the user wants:
+
+- testcase
+- test scenario
+- regression scope
+- test coverage
+- UAT scenario
+- technical specification
 
 ## Confidence
 
@@ -277,8 +285,8 @@ Check:
 
 Check:
 
-- Test Scenarios exist
-- Regression Scope exists
+- Customer Questions exists
+- Analysis Points exists
 
 If a gate fails:
 
@@ -292,7 +300,7 @@ If a gate fails:
 - `basic-design`: Requirement Summary, Business Rules, Impact Matrix, Task Breakdown
 - `feature-implementation`: Basic Design, Traceability Matrix, Source Code, Existing Pattern
 - `code-review`: Requirement, Impact, Design, Source, Implementation Summary
-- `qa`: Requirement, Impact, Design, Code Review Findings
+- `qa`: User Request plus any available Requirement, Screen Definition, Flow, or prior analysis
 - `tsc-generation`: Requirement, Impact, Design, Implementation Summary, QA, Code Review
 
 ## Output Format
@@ -333,7 +341,7 @@ EXECUTE / STOP / ASK CLARIFICATION
 - Do not code directly when requirement or design is missing.
 - Do not estimate without business understanding and impact.
 - Do not create basic design when requirement is still unclear.
-- Do not create QA when requirement understanding is not ready.
+- Do not create customer QA when there is no usable request context.
 - Do not create TSC when source, design, or QA is missing.
 - Do not invent requirement.
 - Do not invent business rule.
