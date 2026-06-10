@@ -1,6 +1,6 @@
 ---
 name: basic-design
-description: Create or update ERP Basic Design outputs from requirement summary, business rules, impact matrix, and task breakdown. Use when Codex must produce screen, input/output, business logic, validation, DB, API, CSV, batch, mail, authority, and traceability design that feeds feature-implementation without guessing.
+description: Use this skill when the user wants solution design for an ERP feature. It covers Basic Design, screen, input, output, validation, business logic, API, DB, CSV, batch, mail, authority, error handling, and sequence design. Do not use it to generate production code or test cases.
 ---
 
 # Basic Design

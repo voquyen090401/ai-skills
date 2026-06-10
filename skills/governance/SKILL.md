@@ -1,6 +1,6 @@
 ---
 name: governance
-description: Govern the full ERP AI delivery lifecycle across business-analysis, impact-analysis, estimation, basic-design, feature-implementation, code-review, qa, tsc-generation, and skill-router by enforcing consistency, traceability, completeness, quality gates, and evidence-based decisions. Use when Codex must verify end-to-end delivery readiness, stop processing on broken traceability or failed prerequisites, and prevent downstream work from continuing when governance conditions are not satisfied.
+description: Use this skill as the ERP governance layer. It defines lifecycle rules, evidence rules, traceability rules, quality gates, skill contracts, prerequisite rules, and delivery standards. This skill should not execute business work directly and exists to keep all ERP skills aligned and consistent.
 ---
 
 # Governance

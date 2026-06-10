@@ -1,6 +1,6 @@
 ---
 name: business-analysis
-description: Perform evidence-based ERP requirement analysis across requirement, QA, screen definition, flow, design, source, database, CSV, API, and existing-system artifacts. Use when Codex must understand business intent, clarify business rules, rewrite requirements, define functional scope, and produce a requirement summary that can feed impact-analysis in the ERP delivery pipeline without guessing.
+description: Use this skill when the user wants to understand, analyze, clarify, rewrite, classify, or explain ERP business requirements. It covers requirement analysis, business rule discovery, functional scope analysis, CRUD vs Business classification, business flow and screen behavior analysis, Japanese ERP terminology explanation, requirement and task rewriting, Big/Medium/Small task identification, open question identification, and missing information detection. Do not use it to create test cases, QA questions, code, design, or TSC.
 ---
 
 # Business Analysis

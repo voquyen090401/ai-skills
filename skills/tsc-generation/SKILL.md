@@ -1,6 +1,6 @@
 ---
 name: tsc-generation
-description: Generate final ERP technical specification artifacts from requirement, impact, design, implementation summary, QA, and code-review outputs. Use when Codex must produce traceable technical documentation from requirement through code and test evidence, including screen, API, DB, CSV, batch, mail, authority, and release notes, without guessing.
+description: Use this skill when the user wants a Technical Specification Document (TSC) generated from requirement, design, source code, QA, UI, API, DB, CSV, batch, or implementation artifacts. It covers Technical Specification, Technical Design Document, Technical Sheet, Traceability Matrix, Functional Documentation, and System Documentation. Do not use it to generate code or estimate effort.
 ---
 
 # TSC Generation

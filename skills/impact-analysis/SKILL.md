@@ -1,6 +1,6 @@
 ---
 name: impact-analysis
-description: Perform evidence-based ERP impact analysis from requirement summary, business rules, impact candidates, and available source, DB, API, CSV, batch, and flow evidence. Use when Codex must identify upstream, current, and downstream impact, produce an impact matrix, highlight risks, list affected objects, and feed estimation or basic-design without guessing.
+description: Use this skill when the user wants to identify the impact of a change across ERP systems. It covers upstream and downstream analysis, impact on screens, APIs, databases, CSV, batch, mail, workflow, status, authority, existing data, dependencies, and risks. Do not use it to estimate effort, create design, or generate code.
 ---
 
 # Impact Analysis

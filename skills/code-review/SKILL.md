@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review ERP implementation against requirement, impact, design, source, and implementation summary to determine correctness, completeness, safety, and release readiness. Use when Codex must produce classified findings, coverage matrices, and a release verdict that feeds qa without focusing on style-only issues.
+description: Use this skill when the user wants source review, implementation validation, release readiness review, or architecture review. It covers requirement, design, and impact coverage review, source, business logic, transaction, database, API, security, performance, and release readiness review. Do not use it to generate new features or modify source directly.
 ---
 
 # Code Review

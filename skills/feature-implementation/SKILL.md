@@ -1,6 +1,6 @@
 ---
 name: feature-implementation
-description: Implement ERP features from Basic Design, Traceability Matrix, Source Code, and existing implementation patterns. Use when Codex must modify source according to approved design, preserve traceability, list changed files and implemented scope, and hand off cleanly to code-review without inventing logic outside the design.
+description: Use this skill when the user wants coding, implementation, source generation, source modification, bug fixing, or ERP feature development. It covers code generation, feature, API, screen, DB, and batch implementation, bug fixing, refactoring, and source modification. Use it only when requirement exists and design should exist. Do not use it to analyze requirement from scratch, create QA, or create TSC.
 ---
 
 # Feature Implementation

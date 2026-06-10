@@ -1,6 +1,6 @@
 ---
 name: qa
-description: Create ERP test strategy, test scenarios, test cases, and regression scope from requirement, impact, design, and code-review findings. Use when Codex must define traceable testing coverage for the implemented change and feed tsc-generation without guessing.
+description: Use this skill when the user wants QA questions, requirement confirmation, test scenarios, test cases, regression scope, or UAT preparation. It covers QA generation, customer confirmation questions, requirement clarification questions, test scenario generation, test case generation, expected result definition, regression scope analysis, and UAT preparation. Do not use it to perform business analysis, generate code, or create design.
 ---
 
 # QA

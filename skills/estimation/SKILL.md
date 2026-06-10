@@ -1,6 +1,6 @@
 ---
 name: estimation
-description: Create evidence-based ERP Big/Medium/Small task breakdowns from requirement summary, impact matrix, and affected objects at business-processing granularity rather than micro code granularity. Use when Codex must produce a traceable task breakdown with Type and Complexity that feeds basic-design without guessing or estimating man-day unless explicitly requested.
+description: Use this skill when the user wants task breakdown, WBS creation, estimation preparation, complexity classification, or ERP work decomposition. It covers Big/Medium/Small task breakdown, WBS creation, type and complexity classification, estimation preparation, and scope decomposition. Do not use it to generate design or code, and do not estimate man-days unless explicitly requested.
 ---
 
 # Estimation

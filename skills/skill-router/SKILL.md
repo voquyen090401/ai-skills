@@ -1,6 +1,6 @@
 ---
 name: skill-router
-description: Intelligently orchestrate ERP requests across business-analysis, impact-analysis, estimation, basic-design, feature-implementation, code-review, qa, and tsc-generation by detecting user intent, selecting the correct execution route, enforcing prerequisite gates, stopping when evidence is missing, and coordinating the ERP delivery pipeline without doing worker-skill analysis on their behalf.
+description: Use this skill as the primary entry point for all ERP requests. It detects user intent, selects the appropriate skill, builds the execution route, checks prerequisites and missing information, applies governance rules, and routes outputs between skills. It should prioritize business-analysis -> impact-analysis -> estimation -> basic-design -> feature-implementation -> code-review -> qa -> tsc-generation when a full ERP delivery flow is required.
 ---
 
 # ERP Skill Router
