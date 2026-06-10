@@ -1,0 +1,7 @@
+interface:
+  display_name: "skill-router"
+  short_description: "ERP entry router for the delivery pipeline"
+  default_prompt: "Use $skill-router as the main ERP entry point. Detect the user's intent, select the correct route across business-analysis, impact-analysis, estimation, basic-design, feature-implementation, code-review, qa, and tsc-generation, enforce prerequisite gates, stop if inputs are missing, and execute only the safe skill or safe route."
+
+policy:
+  allow_implicit_invocation: true

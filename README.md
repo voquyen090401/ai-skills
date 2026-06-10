@@ -1,6 +1,6 @@
-# AISkill
+# ERP Skill System
 
-AISkill la kho chua cac ERP skill dung chung cho Codex va AI agent, tap trung vao cac bai toan phan tich, review, thiet ke, implementation, va test specification trong du an ERP kieu Nhat.
+AISkill la kho chua cac ERP skill dung chung cho Codex va AI agent, duoc to chuc nhu mot ERP delivery pipeline thong nhat.
 
 Muc tieu cua repo:
 
@@ -16,9 +16,13 @@ Muc tieu cua repo:
 skills/
   basic-design/
   business-analysis/
+  code-review/
   estimation/
   feature-implementation/
+  governance/
+  impact-analysis/
   qa/
+  skill-router/
   tsc-generation/
 ```
 
@@ -34,11 +38,38 @@ Moi skill la mot thu muc doc lap. Cau truc thuong gap:
 | Skill | Vai tro chinh | Dung khi nao |
 | --- | --- | --- |
 | `business-analysis` | phan tich requirement ERP theo huong evidence-first | can tai dung he thong dang lam gi, logic hien tai la gi, se thay doi gi, va tong hop phan tich cho BA, SA, Dev, QA, Estimation, Architect |
+| `code-review` | review source ERP theo goc nhin release gate | can kiem tra implementation co dung, du, an toan, va releasable khong dua tren requirement, design, impact, va source |
 | `qa` | review dac ta ERP theo goc nhin BA Nhat cap cao | can tim business gap, missing state, missing condition, downstream risk, concurrency risk, audit risk, production risk |
 | `estimation` | tach task estimation ERP theo bang chung | can phan ra Big, Medium, Small task theo work package ma khong doan logic va khong estimate man-day |
 | `basic-design` | tao hoac cap nhat workbook Basic Design kieu MA | can sinh file `.xlsx` review-ready theo format Basic Design cua du an Nhat |
 | `feature-implementation` | implement feature ERP tren codebase hien co | can di tu requirement, QA, design, source investigation, impact analysis den code change va test ma khong doan logic |
+| `governance` | quan tri toan bo ERP delivery lifecycle | can kiem tra traceability, quality gate, evidence, dieu kien cho phep di tiep, va co block release hay khong |
+| `impact-analysis` | phan tich pham vi anh huong cua change request | can tim upstream, current, downstream impact, object bi anh huong, risk, va feed cho estimate, design, implementation, QA |
+| `skill-router` | dieu pho ERP skill thong minh theo intent va bang chung | can score intent, kiem tra evidence gate, dung route an toan nhat, va dung lai khi thieu tai lieu hoac rule |
 | `tsc-generation` | sinh Test Specification Case chi tiet | can tao TSC execute duoc truc tiep, co matrix coverage, test data, boundary, regression, va quality gate |
+
+## Main Entry
+
+Use `skill-router`.
+
+Do not manually call individual skills unless necessary.
+
+## Pipeline
+
+`business-analysis`
+-> `impact-analysis`
+-> `estimation`
+-> `basic-design`
+-> `feature-implementation`
+-> `code-review`
+-> `qa`
+-> `tsc-generation`
+
+## Rule
+
+Every skill follows ERP Governance.
+Every output must be traceable.
+Every conclusion must have evidence.
 
 ## Suggested Usage
 
@@ -46,6 +77,10 @@ Goi skill bang ten `$skill-name` trong prompt. Vi du:
 
 ```text
 Use $business-analysis to analyze the provided ERP requirement, design, flow, and source artifacts.
+```
+
+```text
+Use $code-review to review the ERP implementation against requirement, design, impact, and source evidence and decide whether the change is safe to release.
 ```
 
 ```text
@@ -62,6 +97,18 @@ Use $basic-design to create an MA-style Basic Design workbook from the provided 
 
 ```text
 Use $feature-implementation to implement the ERP feature from the provided requirement, QA, design, and source artifacts.
+```
+
+```text
+Use $governance to verify ERP delivery traceability, evidence, stage gates, and release readiness before allowing the process to continue.
+```
+
+```text
+Use $impact-analysis to analyze the full ERP change impact across upstream, current, and downstream scope before estimation, design, implementation, migration, or release.
+```
+
+```text
+Use $skill-router to analyze the ERP request, score the candidate skills, apply evidence gates, report confidence and missing input, then execute only the safe ERP skill route.
 ```
 
 ```text
@@ -95,6 +142,28 @@ Tuy theo muc tieu, co the dung skill theo cac flow sau.
 1. `business-analysis`
 2. `qa`
 3. `tsc-generation`
+
+### 5. Requirement to impact flow
+
+1. `impact-analysis`
+2. `estimation` or `basic-design` or `feature-implementation` or `qa`
+
+### 6. Implementation to release review flow
+
+1. `impact-analysis`
+2. `feature-implementation`
+3. `code-review`
+
+### 7. Delivery governance flow
+
+1. `governance`
+2. one or more governed ERP skills
+
+### 8. Automatic routing flow
+
+1. `skill-router`
+2. one or more downstream ERP skills chosen from:
+3. `business-analysis`, `impact-analysis`, `qa`, `estimation`, `basic-design`, `feature-implementation`, `code-review`, `tsc-generation`
 
 ## Shared Principles
 

@@ -1,92 +1,29 @@
 # Output Template
 
-Mỗi `Small` bên dưới phải là một gói công việc phục vụ estimation, không phải một thao tác code vi mô.
+Chỉ xuất kết quả theo đúng bảng sau:
 
-## THÔNG TIN CHỨC NĂNG
+| ProgramID | 機能区分 | 機能名 | Big | Medium | Small | Note | Type | Complexity |
+| --------- | -------- | ------ | --- | ------ | ----- | ---- | ---- | ---------- |
 
-| 管理ID | 管理名 | メニュー名 | ProgramID | 機能区分 | 機能名 |
-| ---- | --- | ----- | --------- | ---- | --- |
+Quy tắc điền:
 
----
+- `ProgramID`: lấy từ tài liệu; nếu không có thì ghi `NOT FOUND IN DOCUMENT`
+- `機能区分`: giữ nguyên thuật ngữ Nhật từ tài liệu; nếu không có thì ghi `NOT FOUND IN DOCUMENT`
+- `機能名`: giữ nguyên thuật ngữ Nhật từ tài liệu; nếu không có thì ghi `NOT FOUND IN DOCUMENT`
+- `Big`: tên chức năng tổng thể bằng tiếng Việt
+- `Medium`: tên nhóm xử lý chính bằng tiếng Việt
+- `Small`: câu ngắn gọn mô tả xử lý cụ thể nhưng không quá vi mô
+- `Note`: ghi chú ngắn nếu cần, ví dụ `NOT FOUND IN DOCUMENT`, `MERGED WITH EXISTING TASK`, hoặc giới hạn phạm vi
+- `Type`: chỉ dùng `initialize`, `CRUD`, `Business`, `Batch`
+- `Complexity`: chỉ dùng `Low`, `Medium`, `High`
 
-# BIG
+Ví dụ văn phong `Small`:
 
-[Tên Big bằng tiếng Việt]
+- Hiển thị các điều kiện tìm kiếm.
+- Tìm kiếm danh sách theo điều kiện nhập.
+- Hiển thị chi tiết kế hoạch được chọn.
+- Cập nhật kế hoạch từ popup.
+- Tạo file CSV danh sách master đơn giá.
+- Gửi yêu cầu online batch và chuyển điều kiện tìm kiếm sang batch.
 
-Evidence:
-...
-
-Impact Area:
-...
-
----
-
-## MEDIUM
-
-[Tên Medium bằng tiếng Việt]
-
-Evidence:
-...
-
----
-
-### SMALL
-
-[Tên Small bằng tiếng Việt]
-
-Type:
-...
-
-Technical Layer:
-...
-
-Complexity:
-...
-
-Feature Count:
-1
-
-Evidence:
-...
-
-Impact Area:
-...
-
----
-
-# DANH SÁCH TASK
-
-| ProgramID | Big | Medium | Small | Type | Layer | Complexity | Feature |
-| --------- | --- | ------ | ----- | ---- | ----- | ---------- | ------- |
-
----
-
-# OUT OF SCOPE
-
-Liệt kê các nội dung ngoài phạm vi.
-
----
-
-# MISSING INFORMATION
-
-Liệt kê các thông tin còn thiếu.
-
----
-
-# FINAL SUMMARY
-
-Tổng số Big:
-
-Tổng số Medium:
-
-Tổng số Small:
-
-Số lượng Out Scope:
-
-Số lượng Missing Information:
-
-Coverage Requirement (%):
-
-Risk:
-
-Open Questions:
+Không xuất thêm các section như summary, out of scope, missing information, hay giải thích dài dòng nếu user không yêu cầu riêng.

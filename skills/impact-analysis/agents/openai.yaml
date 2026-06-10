@@ -1,0 +1,7 @@
+interface:
+  display_name: "impact-analysis"
+  short_description: "Evidence-first ERP change impact analysis"
+  default_prompt: "Use $impact-analysis to analyze the full upstream, current, and downstream impact of the ERP change request from requirement, design, source, flow, and DB evidence, identify affected objects and risks, and prepare impact feeds for estimation, basic-design, feature-implementation, and qa without guessing."
+
+policy:
+  allow_implicit_invocation: true

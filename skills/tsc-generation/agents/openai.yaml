@@ -1,4 +1,4 @@
 interface:
-  display_name: "ERP TSC Generator"
-  short_description: "Generate evidence-based ERP TSC"
-  default_prompt: "Use $tsc-generation to generate a detailed ERP Test Specification Case from the provided requirement, design, source, and project TSC sample without guessing."
+  display_name: "tsc-generation"
+  short_description: "Final ERP technical specification generation"
+  default_prompt: "Use $tsc-generation to generate the final ERP Technical Specification from Requirement, Impact, Design, Implementation Summary, QA, and Code Review, covering functional overview, processing detail, screen, API, DB, CSV, batch, mail, authority, Traceability Matrix, and Release Notes without guessing."

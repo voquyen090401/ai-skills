@@ -3,7 +3,7 @@
 Use this template when invoking the skill for a new feature.
 
 ```text
-Use $ma-basic-design-workbook to create a Japanese-style Basic Design workbook in `.xlsx` format.
+Use $basic-design to create a Japanese-style Basic Design workbook in `.xlsx` format.
 
 Goal:
 - Generate a review-ready Basic Design workbook that feels like the same family as the MA-style Japanese enterprise samples.

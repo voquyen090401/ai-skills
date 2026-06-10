@@ -1,4 +1,4 @@
 interface:
-  display_name: "MA Basic Design Workbook"
-  short_description: "Create MA-style Basic Design Excel workbooks"
-  default_prompt: "Use $ma-basic-design-workbook to create an MA-style Basic Design workbook from the requirement inputs and MA sample files."
+  display_name: "basic-design"
+  short_description: "ERP basic design with traceable design sections"
+  default_prompt: "Use $basic-design to create ERP Basic Design from Requirement Summary, Business Rules, Impact Matrix, and Task Breakdown, covering screen, business logic, validation, DB, API, CSV, batch, mail, authority, and Traceability Matrix without guessing."

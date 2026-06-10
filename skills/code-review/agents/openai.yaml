@@ -1,0 +1,7 @@
+interface:
+  display_name: "code-review"
+  short_description: "ERP code review for correctness and release safety"
+  default_prompt: "Use $code-review to review the ERP implementation against requirement, QA, design, impact, and source evidence, identify correctness gaps and production risks, and decide whether the change is releasable without focusing on style-only feedback."
+
+policy:
+  allow_implicit_invocation: true

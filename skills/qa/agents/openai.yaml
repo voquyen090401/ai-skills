@@ -1,4 +1,4 @@
 interface:
-  display_name: "Elite ERP BA QA"
-  short_description: "Break ERP specs before development"
-  default_prompt: "Use $japanese-erp-qa to review the provided ERP documents as an elite Japanese BA reviewer and output only QA đạt điểm 4 hoặc 5, grouped by the mandatory sections."
+  display_name: "qa"
+  short_description: "ERP test design and regression scope"
+  default_prompt: "Use $qa to create Test Strategy, Test Scenarios, Test Cases, Regression Scope, Coverage Matrix, and Missing Information from Requirement, Impact, Design, and Code Review Findings, keeping the output traceable for tsc-generation."

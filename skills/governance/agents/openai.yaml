@@ -1,0 +1,7 @@
+interface:
+  display_name: "governance"
+  short_description: "ERP delivery governance and quality gate control"
+  default_prompt: "Use $governance to govern the ERP delivery lifecycle across requirement, impact, task, design, implementation, review, QA, and TSC, verify traceability and quality gates, stop on failed prerequisites, and decide whether delivery may proceed or release must be blocked."
+
+policy:
+  allow_implicit_invocation: true
