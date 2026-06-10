@@ -53,6 +53,19 @@ The user should not need to call each skill manually.
 
 ## Intent Detection
 
+### QA Shorthand Priority
+
+If the user uses `QA` as a standalone request such as `viet QA`, `lam QA`, `tao QA`, or `QA cho toi`, route to `qa` by default.
+
+Only do not default to `qa` when the same request explicitly asks for:
+
+- code or implementation
+- design
+- TSC or technical specification
+- code review
+- impact analysis
+- estimation
+
 ### Business Analysis Intent
 
 Route:
@@ -159,6 +172,7 @@ Route:
 Use when the user wants:
 
 - QA
+- standalone QA shorthand such as `viet QA`, `lam QA`, `tao QA`, `QA cho toi`
 - testcase
 - test scenario
 - regression scope

@@ -1,6 +1,6 @@
 ---
 name: qa
-description: Use this skill when the user wants QA questions, requirement confirmation, test scenarios, test cases, regression scope, or UAT preparation. It covers QA generation, customer confirmation questions, requirement clarification questions, test scenario generation, test case generation, expected result definition, regression scope analysis, and UAT preparation. Do not use it to perform business analysis, generate code, or create design.
+description: Use this skill when the user wants QA questions, requirement confirmation, test scenarios, test cases, regression scope, or UAT preparation. If the user says only `QA`, `viet QA`, `lam QA`, or similar shorthand, default to this skill unless they explicitly ask for code, design, or TSC instead. It covers QA generation, customer confirmation questions, requirement clarification questions, test scenario generation, test case generation, expected result definition, regression scope analysis, and UAT preparation. Do not use it to perform business analysis, generate code, or create design.
 ---
 
 # QA
