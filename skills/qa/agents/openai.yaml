@@ -1,4 +1,7 @@
 interface:
-  display_name: "BrSE Investigation QA"
-  short_description: "BrSE clarification QA with mandatory 3-part structure"
-  default_prompt: "Use $qa to draft BrSE investigation QA with mandatory Mở bài, Thân bài, and Kết bài from the attached spec, gold dataset, and current-system evidence."
+  display_name: "qa"
+  short_description: "BrSE investigation QA for ERP clarification"
+  default_prompt: "Use $qa to draft BrSE investigation QA from the attached spec, gold dataset, and current-system evidence, keeping the output grounded in investigation and structured with opening, body, and closing."
+
+policy:
+  allow_implicit_invocation: true
