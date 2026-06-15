@@ -1,160 +1,72 @@
-# QA Groups
+﻿# QA Groups
 
-Dùng đúng 10 nhóm này và giữ nguyên thứ tự.
-Chỉ giữ các QA đạt điểm `4` hoặc `5`.
+Use these groups when writing or regenerating BrSE investigation QA.
+Pick the smallest group that best matches the business gap.
 
-## 1. Business Logic QA
+## 1. impact_investigation
 
-Dùng khi gap liên quan đến:
+Use when an item is added, removed, or changed and you need to investigate affected screens, CSV, batch, table, search condition, report, or downstream module.
 
-- Điều kiện chuyển trạng thái
-- Điều kiện hoàn thành, hủy, close, reopen, hoặc lock
-- Thời điểm hoặc quyền chỉnh sửa
-- Thời điểm update, thời điểm recalculation, hoặc commit point
+## 2. scope_keep
 
-Tín hiệu thường gặp:
-Tài liệu có mô tả chuyện gì xảy ra, nhưng chưa mô tả khi nào được phép, khi nào bị chặn, khi nào finalized, hoặc khi nào được quay lại.
-Nhóm này cũng phải bắt được dead-end flow và các trạng thái thiếu đường ra hoặc đường quay lại.
+Use when some screens are listed in scope files but are not described in the target sheet, and you need to confirm they remain unchanged.
 
-## 2. Data Source QA
+## 3. version_conflict
 
-Dùng khi gap liên quan đến:
+Use when old and new materials conflict and you need the customer to confirm which version is correct.
 
-- Source of truth từ master hoặc transaction
-- Dữ liệu hiện tại hay dữ liệu lịch sử
-- Công thức tính giá trị dẫn xuất hoặc nguồn lookup
-- Cách xử lý khi source data bị thiếu hoặc bị xóa
-- Nguồn migration từ hệ thống cũ hoặc fallback source
+## 4. search_item
 
-Tín hiệu thường gặp:
-Màn hình hoặc interface cần một giá trị nhưng chưa rõ lấy từ table, master, history, hoặc hệ thống cũ nào.
+Use when a search input is added or changed and you need to confirm placement, UI type, choices, AND/OR logic, or grouping.
 
-## 3. Search Condition QA
+## 5. workflow_gap
 
-Dùng khi gap liên quan đến:
+Use when a screen or business step is removed, merged, or changed and the replacement flow is not fully described.
 
-- Điều kiện AND hay OR
-- Giá trị mặc định
-- Khoảng ngày mặc định
-- Ưu tiên hoặc precedence giữa các điều kiện
-- Cách xử lý khi không nhập điều kiện
-- Pagination hoặc giới hạn số bản ghi
+## 6. import_csv
 
-Tín hiệu thường gặp:
-Điều kiện search đã có nhưng filter logic, default, hoặc extraction scope chưa được mô tả đầy đủ.
+Use when CSV import behavior is unclear, including template, encoding, rollback policy, update logic, error handling, or permission.
 
-## 4. Display QA
+## 7. csv_output
 
-Dùng khi gap liên quan đến:
+Use when CSV output columns, header, source table, mapping, sort order, or compatibility behavior are unclear.
 
-- Điều kiện hiển thị hoặc ẩn
-- Điều kiện enable, disable, readonly
-- Thứ tự hiển thị hoặc việc đóng/mở section
-- Format, placeholder, hoặc fallback display behavior
+## 8. display_label
 
-Tín hiệu thường gặp:
-Item có xuất hiện trên màn hình nhưng logic hiển thị hoặc state control chưa rõ.
+Use when label conversion, icon/text choice, color, tooltip, or display priority is unclear.
 
-## 5. Mail Notification QA
+## 9. notification
 
-Dùng khi gap liên quan đến:
+Use when email or system notification behavior is unclear, including recipients, To/Cc, template, timing, and failure handling.
 
-- Đối tượng nhận mail
-- Rule CC hoặc BCC
-- Thời điểm gửi
-- Mail template
-- Nhiều người nhận hoặc duplicate notification
-- Phân nhánh người nhận theo phòng ban hoặc role
+## 10. mapping
 
-Tín hiệu thường gặp:
-Flow có nhắc việc gửi mail nhưng recipients, trigger, hoặc content source chưa khép kín.
+Use when item names differ across screen, DB, CSV, API, or add-item sheets and you need to confirm the correct mapping.
 
-## 6. Approval Flow QA
+## 11. permission
 
-Dùng khi gap liên quan đến:
+Use when the behavior depends on role, department, button authority, override rules, or visibility by user type.
 
-- Cách xác định approver
-- Delegate hoặc proxy approval
-- Điều kiện reject, send-back, re-apply, hoặc re-approve
-- Thay đổi approval route sau khi resubmit
-- Hành vi của final approver khi dữ liệu nền bị thay đổi
+## 12. master_data
 
-Tín hiệu thường gặp:
-Có approval flow nhưng authority chain hoặc hành vi khi resubmission chưa đầy đủ.
+Use when dropdown or input values depend on master data and you need to confirm the source master, inactive handling, or parent-child relation.
 
-## 7. CSV QA
+## 13. multi_rule
 
-Dùng khi gap liên quan đến:
+Use when multiple rules overlap and you need to confirm the priority or conflict resolution.
 
-- Phạm vi export
-- Sort mặc định
-- Encoding
-- Quy tắc header
-- Cách xuất null, blank, hoặc code-name
-- Validation khi import hoặc partial-success behavior
+## 14. batch
 
-Tín hiệu thường gặp:
-Đã có CSV nhưng quy ước input hoặc output mới được định nghĩa một phần.
+Use when batch timing, snapshot timing, rerun behavior, log output, or integration with manual operations is unclear.
 
-## 8. Interface QA
+## 15. api
 
-Dùng khi gap liên quan đến:
+Use when API timing, retry, timeout, callback, idempotency, or interface behavior is unclear.
 
-- Thời điểm gọi API
-- Retry policy
-- Timeout
-- Failure handling
-- Idempotency hoặc duplicate send control
-- Thời điểm phản ánh callback hoặc kết quả
-- Thời điểm handover dữ liệu với hệ thống cũ
+## 16. database
 
-Tín hiệu thường gặp:
-Có external interface nhưng operational behavior chưa được định nghĩa đầy đủ.
+Use when table/column reuse, null handling, history retention, or migration/backfill behavior is unclear.
 
-## 9. Master QA
+## 17. exception_case
 
-Dùng khi gap liên quan đến:
-
-- Có cần master mới hay không
-- Có tái sử dụng master hiện hữu hay không
-- Owner chịu trách nhiệm maintain
-- Effective period hoặc activation rule
-- Liên hệ giữa master và screen input validation
-
-Tín hiệu thường gặp:
-Cần code, list, hoặc category có thể cấu hình nhưng ownership hoặc maintenance policy chưa rõ.
-
-## 10. Exception QA
-
-Dùng khi gap liên quan đến:
-
-- Dữ liệu bị xóa hoặc invalid
-- Record đã được downstream xử lý
-- Rollback, send-back, recall, hoặc undo
-- Duplicate data
-- Concurrent updates
-- Partial completion hoặc xử lý bị gián đoạn
-- Thiếu audit trail hoặc recovery path khi xảy ra abnormal case
-
-Tín hiệu thường gặp:
-Happy path đã có nhưng abnormal handling hoặc boundary handling chưa khép kín.
-
-## Prioritization Heuristic
-
-Đánh `Critical` khi câu trả lời có thể làm thay đổi:
-
-- Kết quả quyết định nghiệp vụ
-- Approval authority
-- Kết quả dữ liệu được lưu
-- Hành vi của hệ thống bên ngoài
-- Auditability hoặc operational recovery
-- Độ ổn định vận hành production
-
-Đánh `High` khi câu trả lời ảnh hưởng đến:
-
-- Tính nhất quán thao tác của operator
-- Độ chính xác của report
-- Độ chính xác của search hoặc export có ảnh hưởng nghiệp vụ đáng kể
-- Khả năng kiểm soát invalid hoặc stale master data
-
-Không xuất các QA mức `Medium` hoặc `Low`.
+Use when rollback, duplicate, concurrent update, downstream mismatch, invalid data, or other abnormal cases are unclear.

@@ -1,4 +1,4 @@
-interface:
-  display_name: "qa"
-  short_description: "ERP test design and regression scope"
-  default_prompt: "Use $qa to create Test Strategy, Test Scenarios, Test Cases, Regression Scope, Coverage Matrix, and Missing Information from Requirement, Impact, Design, and Code Review Findings, keeping the output traceable for tsc-generation."
+﻿interface:
+  display_name: "BrSE Investigation QA"
+  short_description: "Investigation-first customer clarification QA"
+  default_prompt: "Use $qa to draft BrSE investigation QA from the attached spec, gold dataset, and current-system evidence."

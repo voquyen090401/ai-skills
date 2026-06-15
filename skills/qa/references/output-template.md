@@ -1,75 +1,141 @@
-# Output Template
+﻿# Output Template
 
-Luôn nhóm kết quả theo đủ 10 heading.
-Không xuất phần tóm tắt hoặc danh sách chức năng trước các section QA.
-Chỉ xuất QA đạt điểm `4` hoặc `5`.
+Use the natural BrSE investigation style below unless the user explicitly asks for another format.
 
-## Section format
+## Core Writing Pattern
+
+Each QA should usually flow like this:
+
+1. Open with the scope or topic
+2. State what the current document says
+3. State what the current-system investigation found
+4. State the team's current understanding
+5. State the likely handling direction
+6. Ask the customer to confirm
+
+## Preferred Natural Patterns
+
+### Pattern A: Impact Investigation
 
 ```text
-1. Business Logic QA
+Liên quan đến việc xóa/bổ sung item 「XXX」
 
-- QA-BL-01 | Điểm rủi ro: 5 | Critical | Tài liệu liên quan: Requirement, Basic Design, Flow Diagram
-  Nội dung QA:
-  Liên quan đến chức năng [tên chức năng] tại [màn hình/flow], hiện tại chúng tôi hiểu như sau:
-  1. ...
-  2. ...
-  3. ...
-  Tuy nhiên hiện tại chúng tôi chưa thấy mô tả rõ về ...
-  Giả định hiện tại của chúng tôi là ...
-  Do đó chúng tôi muốn xác nhận:
-  1. ...
-  2. ...
-  3. ...
-  Nhờ Bác xác nhận giúp.
+Theo tài liệu hiện tại, item này được mô tả tại màn hình AAA.
+
+Tuy nhiên, sau khi điều tra hệ thống hiện tại, chúng tôi nhận thấy item này còn được sử dụng tại:
+
+* BBB: dùng cho hiển thị / tham chiếu
+* CCC: dùng cho CSV export
+* DDD: dùng cho CSV import
+* EEE: dùng cho search condition
+
+Do đó, chúng tôi đang hiểu rằng khi xử lý item này ở AAA, các màn hình BBB/CCC/DDD/EEE cũng cần được cập nhật đồng bộ.
+
+Phương án đối ứng của chúng tôi dự kiến là:
+
+* cập nhật màn hình chính AAA
+* cập nhật các màn hình / CSV / batch liên quan
+* giữ nguyên database nếu không có chỉ thị thay đổi schema
+
+Nhờ bác xác nhận lại nội dung trên.
+Cảm ơn bác.
 ```
 
-If no meaningful QA exists in a section, write:
+### Pattern B: Scope Keep
 
 ```text
-Không phát sinh QA cần xác nhận trong nhóm này.
+Về các màn hình không mô tả trong sheet XXX
+
+Các màn hình dưới đây không được mô tả trong sheet XXX, nhưng được liệt kê là đối tượng trong file 基幹システム機能一覧精査:
+
+* AAA
+* BBB
+* CCC
+
+Chúng tôi hiểu rằng các màn hình này sẽ giữ nguyên xử lý hiện tại.
+
+Nhờ bác xác nhận giúp nhận thức trên.
+```
+
+### Pattern C: Version Conflict
+
+```text
+Về việc giữ lại hay xóa chức năng 「XXX」
+
+Theo tài liệu A ngày yyyy/mm/dd, chúng tôi thấy có mô tả rằng chức năng XXX sẽ bị xóa.
+Tuy nhiên, theo tài liệu B ngày yyyy/mm/dd, chúng tôi thấy chức năng này vẫn đang được giữ lại.
+
+Do đó, chúng tôi đang hiểu rằng cần chốt lại version chính thức trước khi tiến hành design và estimate.
+
+Nhờ bác xác nhận giúp chức năng XXX vẫn sẽ được giữ lại trên hệ thống hiện tại, đúng không?
+```
+
+### Pattern D: Workflow Gap
+
+```text
+① Chúng tôi đang hiểu là sẽ thực hiện xóa màn hình XXX ra khỏi hệ thống.
+Phiền bác xác nhận lại nội dung này.
+
+② Q&A xác nhận phạm vi thay thế sau khi xóa XXX
+
+Màn hình XXX hiện tại thực hiện các chức năng chính:
+
+1. ...
+2. ...
+3. ...
+
+Sau khi điều tra hệ thống hiện tại, chúng tôi nhận thấy các chức năng trên đang ảnh hưởng đến các màn hình / flow liên quan như sau:
+
+* AAA: ...
+* BBB: ...
+
+Do đó, chúng tôi đang hiểu rằng cần xác nhận rõ màn hình nào sẽ tiếp nhận trách nhiệm thay thế.
+
+Nhờ bác xác nhận giúp.
 ```
 
 ## Writing Checklist
 
-Trước khi chốt từng QA, tự kiểm tra:
+Before finalizing each QA, confirm:
+- There is a concrete investigation signal.
+- The QA lists specific screens, CSV, batch, table, status, role, or mapping when relevant.
+- The current understanding is explicit.
+- The likely handling direction is explicit when possible.
+- The wording sounds like a BrSE, not an AI template.
 
-- Ngữ cảnh đã nêu rõ function, screen, flow, batch, hoặc interface.
-- Nhận thức hiện tại xuất phát từ tài liệu cụ thể, không phải chỉ đoán.
-- Điểm chưa khớp hoặc còn thiếu đã được chỉ ra rõ ràng.
-- Giả định đã được viết tường minh nếu spec còn thiếu.
-- Các điểm cần xác nhận là cụ thể và chỉ xoay quanh một chủ đề nghiệp vụ.
-- QA chứng minh được lý do đạt điểm `4` hoặc `5`.
-- QA thuộc đúng một nhóm chính.
-- Câu hỏi không phải kiểu xin giải thích chung chung.
+## Weak Patterns To Avoid
 
-## Strong QA Example
+Avoid:
 
 ```text
-- QA-IF-02 | Điểm rủi ro: 5 | Critical | Tài liệu liên quan: Detail Design, Sequence Diagram, Interface Specification
-  Nội dung QA:
-  Liên quan đến interface gửi dữ liệu đơn hàng sang hệ thống kế toán, hiện tại chúng tôi hiểu như sau:
-  1. API được gọi tại thời điểm đơn hàng chuyển sang trạng thái "Approved".
-  2. Nếu API trả về thành công thì hệ thống cập nhật cờ gửi interface = Done.
-  3. Sequence Diagram có mô tả xử lý success, tuy nhiên chưa thấy mô tả cách xử lý khi timeout hoặc trả về lỗi.
-  Tuy nhiên hiện tại chúng tôi chưa thấy mô tả về cách ngăn gửi trùng khi user thực hiện thao tác retry trong lúc kết quả lần gửi trước chưa được phản ánh.
-  Giả định hiện tại của chúng tôi là trong trường hợp timeout, hệ thống chưa cập nhật trạng thái gửi và cho phép retry bằng batch hoặc thao tác tay.
-  Do đó chúng tôi muốn xác nhận:
-  1. Trường hợp timeout có được phép retry từ màn hình hay chỉ từ batch.
-  2. Hệ thống dùng khóa nào để ngăn duplicate interface.
-  3. Nếu hệ thống nhận được response thành công trễ sau khi đã retry, trạng thái cuối cùng được xác định theo nguyên tắc nào.
-  Nhờ Bác xác nhận giúp.
+- Field này có required không?
+- Có export CSV không?
+- Có validate không?
+- Ai được thao tác?
 ```
 
-## Weak QA Patterns To Avoid
+Rewrite them into investigation QA with evidence and current understanding.
 
-Tránh các dạng sau:
+## Dataset Output
 
-```text
-- Chức năng này dùng để làm gì?
-- Logic này như thế nào?
-- Xin xác nhận màn hình này.
-- Các QA chỉ có giá trị tham khảo nhưng chưa cho thấy rủi ro nghiệp vụ hoặc production.
+For dataset regeneration, each line must be one JSON object:
+
+```json
+{
+  "id": "BI-QA-0001",
+  "category": "impact_investigation",
+  "module": "MA10",
+  "screen": "MA1010",
+  "topic": "standard_time_reference_items",
+  "style": "investigation_confirm",
+  "source_pattern": "impact_list_screens",
+  "difficulty": "high",
+  "qa": "..."
+}
 ```
 
-Hãy viết lại thành QA có ngữ cảnh rõ ràng, nêu nhận thức hiện tại, nêu gap, rồi mới xác nhận.
+Rules:
+- Do not force rigid headings on every QA.
+- Every QA must include at least one investigation element.
+- Prefer natural flow and high information density.
+- Quality is more important than count.
