@@ -91,7 +91,7 @@ function Get-SourcePattern {
 function Parse-Sections {
     param([string]$QaText)
 
-    $context = [regex]::Match($QaText, '■ Bối cảnh\s*(?<content>[\s\S]*?)■ Nhận thức hiện tại')
+    $context = [regex]::Match($QaText, '■ Bối cảnh\s*(?<content>[\s\S]*?)(■ Nhận thức hiện tại|■ Câu hỏi xác nhận)')
     $understanding = [regex]::Match($QaText, '■ Nhận thức hiện tại\s*(?<content>[\s\S]*?)■ Câu hỏi xác nhận')
     $question = [regex]::Match($QaText, '■ Câu hỏi xác nhận\s*(?<content>[\s\S]*)$')
 
@@ -344,12 +344,17 @@ function Build-BrSEText {
     $lead = Get-Lead -NewCategory $NewCategory -Item $Item
 
     $result = New-Object System.Collections.Generic.List[string]
+    $result.Add("Mở bài:")
+    $result.Add("")
     $result.Add($lead)
     $result.Add("")
 
     foreach ($line in $contextLines) {
         $result.Add($line)
     }
+
+    $result.Add("")
+    $result.Add("Để thống nhất hướng xử lý và tránh hiểu sai nghiệp vụ, chúng tôi muốn xác nhận thêm các nội dung sau.")
 
     $relatedScreens = Get-RelatedScreens -Lines $contextLines
     if (@($relatedScreens).Count -gt 1) {
@@ -362,14 +367,16 @@ function Build-BrSEText {
         }
     }
 
+    $result.Add("")
+    $result.Add("Thân bài:")
+    $result.Add("")
+
     $investigationLine = $contextLines | Where-Object { $_.StartsWith("Sau khi điều tra hệ thống hiện tại") } | Select-Object -First 1
     if ($investigationLine) {
-        $result.Add("")
-        $result.Add("Do đó, chúng tôi đang hiểu rằng:")
+        $result.Add("Hiện tại bên chúng tôi đang hiểu rằng:")
     }
     else {
-        $result.Add("")
-        $result.Add("Sau khi điều tra hệ thống hiện tại, chúng tôi nhận thấy và đang hiểu như sau:")
+        $result.Add("Sau khi điều tra hệ thống hiện tại, chúng tôi đang hiểu như sau:")
     }
 
     foreach ($line in $understandingLines) {
@@ -386,15 +393,25 @@ function Build-BrSEText {
 
     if ($questionLines.Count -gt 0) {
         $result.Add("")
-        $result.Add((Get-ConfirmationIntro -NewCategory $NewCategory))
+        $result.Add("Các nội dung cần xác nhận:")
         $index = 1
         foreach ($line in $questionLines) {
             $clean = $line.TrimStart("- ").Trim()
-            $result.Add("$index. $clean")
+            switch ($index) {
+                1 { $marker = "①" }
+                2 { $marker = "②" }
+                3 { $marker = "③" }
+                4 { $marker = "④" }
+                5 { $marker = "⑤" }
+                default { $marker = "$index." }
+            }
+            $result.Add("$marker $clean")
             $index++
         }
     }
 
+    $result.Add("")
+    $result.Add("Kết bài:")
     $result.Add("")
     $result.Add("Nhờ bác xác nhận lại nội dung trên.")
     $result.Add("Nếu không đúng, phiền bác mô tả rõ hơn.")
