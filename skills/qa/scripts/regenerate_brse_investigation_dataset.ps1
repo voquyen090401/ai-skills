@@ -344,8 +344,6 @@ function Build-BrSEText {
     $lead = Get-Lead -NewCategory $NewCategory -Item $Item
 
     $result = New-Object System.Collections.Generic.List[string]
-    $result.Add("Mở bài:")
-    $result.Add("")
     $result.Add($lead)
     $result.Add("")
 
@@ -367,8 +365,6 @@ function Build-BrSEText {
         }
     }
 
-    $result.Add("")
-    $result.Add("Thân bài:")
     $result.Add("")
 
     $investigationLine = $contextLines | Where-Object { $_.StartsWith("Sau khi điều tra hệ thống hiện tại") } | Select-Object -First 1
@@ -410,8 +406,6 @@ function Build-BrSEText {
         }
     }
 
-    $result.Add("")
-    $result.Add("Kết bài:")
     $result.Add("")
     $result.Add("Nhờ bác xác nhận lại nội dung trên.")
     $result.Add("Nếu không đúng, phiền bác mô tả rõ hơn.")

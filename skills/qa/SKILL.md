@@ -27,7 +27,7 @@ Rules:
 This skill is for clarification QA to send to the customer or internal BrSE counterpart.
 
 Do:
-- write every QA with 3 mandatory parts: `Mở bài`, `Thân bài`, `Kết bài`
+- write every QA with 3 mandatory parts in structure: `Mở bài`, `Thân bài`, `Kết bài`
 - open with the scope, issue, or screen being discussed
 - show investigation results from the current system
 - list affected screens, CSV, batch, table, status, role, or mapping when relevant
@@ -86,6 +86,7 @@ Inside `Customer Questions`, each QA itself must contain:
 - `Kết bài`: nhờ xác nhận, nếu khác thì nhờ mô tả rõ hơn, và cảm ơn
 
 Keep the writing natural in BrSE style, but do not skip the mandatory 3-part structure.
+Do not print the literal labels `Mở bài`, `Thân bài`, or `Kết bài` in the final QA unless the user explicitly asks for visible headings.
 
 ### 2. Dataset Mode
 
@@ -132,7 +133,9 @@ Preferred phrases:
 - `Cảm ơn bác.`
 
 Formatting rules:
-- every QA must visibly contain `Mở bài`, `Thân bài`, and `Kết bài`
+- every QA must structurally contain `Mở bài`, `Thân bài`, and `Kết bài`
+- do not print the literal headings `Mở bài`, `Thân bài`, `Kết bài` in normal output
+- separate the 3 parts by one blank line only
 - inside `Thân bài`, allow numbered lists, `① ②`, bullets, or mixed structure when it feels natural
 - allow multiple small confirmation points inside one QA if they belong to the same business issue
 - keep the writing grounded in actual investigation
@@ -156,7 +159,7 @@ Rewrite them into BrSE investigation QA with:
 ## Quality Gates
 
 Every final QA must satisfy all of the following:
-- contains `Mở bài`, `Thân bài`, and `Kết bài`
+- contains `Mở bài`, `Thân bài`, and `Kết bài` in structure, not necessarily as visible labels
 - shows signs of investigation
 - mentions concrete screens, batch, CSV, table, status, role, or mapping when relevant
 - states the team's current understanding
@@ -176,6 +179,6 @@ Stop and report the limitation when:
 
 - Use stable identifiers when dataset output requires them.
 - Prefer one business issue per QA, but allow multiple sub-questions inside the same QA when they are tightly connected.
-- When regenerating datasets, every QA must still contain `Mở bài`, `Thân bài`, and `Kết bài`; reject short QA that only says current understanding plus confirmation.
+- When regenerating datasets, every QA must still contain `Mở bài`, `Thân bài`, and `Kết bài` in structure; reject short QA that only says current understanding plus confirmation.
 - When regenerating datasets, use the gold dataset as the source of good ideas, then rewrite into longer investigation QA with context, understanding, and handling direction.
 - When the user asks only for standard QA, do not switch to dataset JSONL mode.
