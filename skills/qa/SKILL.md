@@ -1,12 +1,12 @@
-﻿---
+---
 name: qa
 description: Use this skill when the user wants BrSE investigation QA, customer confirmation questions, requirement clarification questions, or QA dataset regeneration from spec, source, flow, meeting notes, current-system investigation, or old Q&A. Trigger on requests like `QA`, `viet QA`, `lam QA`, `clarification questions`, `investigation QA`, or requests to rewrite or regenerate BrSE-style customer Q&A. It covers impact investigation, scope-keep confirmation, version conflict checks, workflow gap questions, CSV questions, notification questions, mapping questions, and evidence-based current-understanding statements. Do not use it to generate code, test cases, design, or TSC.
 ---
 
 # QA
 
-Create investigation-heavy customer clarification QA in BrSE style.
-Write like a Vietnamese BrSE who has read the documents, checked the current system, identified the gap, proposed a handling direction, and is asking the customer to confirm.
+Create customer clarification QA in concise Vietnamese BrSE style.
+Write like a Vietnamese BrSE who has read the documents, checked the current system, grouped the logic clearly, and is asking the customer to confirm the current understanding.
 
 ## Governance Compliance
 
@@ -27,20 +27,21 @@ Rules:
 This skill is for clarification QA to send to the customer or internal BrSE counterpart.
 
 Do:
-- write every QA with 3 mandatory parts in structure: `Mở bài`, `Thân bài`, `Kết bài`
-- open with the scope, issue, or screen being discussed
-- show investigation results from the current system
-- list affected screens, CSV, batch, table, status, role, or mapping when relevant
-- state the team's current understanding
-- propose a likely handling direction when possible
+- write every customer QA with exactly 3 mandatory parts in structure: `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, `Kết thúc`
+- open with the exact confirmation sentence pattern required by this skill
+- show the current understanding based only on available evidence
+- group multiple conditions or spec details into clear business logic when relevant
+- list unclear points as numbered confirmation items
+- keep Japanese terms and field names unchanged
 - ask the customer to confirm or correct that understanding
 
 Do not:
-- write low-level one-line confirm questions
 - omit one of the three mandatory parts
 - generate generic test cases
 - generate implementation design
 - answer the customer's decision on their behalf
+- add handling directions or business rules that are not present in the input or evidence
+- add commentary outside the final customer message in standard QA mode
 
 ## Required References
 
@@ -64,29 +65,30 @@ Read these files before drafting the final output:
 
 Use by default when the user asks for `QA`, `viet QA`, `lam QA`, customer questions, or clarification questions.
 
-Output sections:
+Return only the final customer message.
+Do not add headings such as `QA Purpose`, `Analysis`, `Evidence`, or any explanation outside the message.
 
-```md
-## QA Purpose
+Every QA must contain exactly these 3 parts:
 
-## Customer Questions
+1. `Mở đầu`
+2. `Nội dung đang hiểu + điểm cần confirm`
+3. `Kết thúc`
 
-## Analysis Points
+Use the required wording pattern:
 
-## Assumptions To Confirm
+- `Mở đầu`:
+  `Liên quan đến yêu cầu [tên yêu cầu/nội dung yêu cầu], chúng tôi đang hiểu như sau và muốn confirm lại với bác:`
+- `Nội dung đang hiểu + điểm cần confirm`:
+  - first, summarize the current understanding in short and clear Vietnamese
+  - then write:
+    `Chúng tôi muốn confirm thêm các điểm sau:`
+  - then list numbered points `1.`, `2.`, `3.` only for unclear or high-risk items that need confirmation
+- `Kết thúc`:
+  `Nhờ bác confirm giúp nội dung trên có đúng không?`
+  `Cảm ơn bác.`
 
-## Evidence
-
-## Missing Information
-```
-
-Inside `Customer Questions`, each QA itself must contain:
-- `Mở bài`: nêu chủ đề, lý do phát sinh QA, điều tra ban đầu, mục tiêu xác nhận
-- `Thân bài`: phải có ít nhất một trong các nội dung như nhận thức hiện tại, kết quả điều tra, phương án đối ứng, danh sách câu hỏi cần xác nhận
-- `Kết bài`: nhờ xác nhận, nếu khác thì nhờ mô tả rõ hơn, và cảm ơn
-
-Keep the writing natural in BrSE style, but do not skip the mandatory 3-part structure.
-Do not print the literal labels `Mở bài`, `Thân bài`, or `Kết bài` in the final QA unless the user explicitly asks for visible headings.
+If there is no confirm point, still keep the 3-part structure and use one numbered item to confirm the overall understanding.
+Do not print the literal labels `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, or `Kết thúc` unless the user explicitly asks for visible headings.
 
 ### 2. Dataset Mode
 
@@ -96,10 +98,10 @@ Output JSONL only unless the user explicitly asks for commentary.
 
 Dataset priorities:
 - quality over quantity
-- investigation signs over generic confirmation
+- evidence-grounded current understanding over generic confirmation
 - mandatory 3-part structure over loose free-form QA
 - natural BrSE wording inside that structure
-- real impact over paraphrasing the spec
+- real business ambiguity over paraphrasing the spec
 
 ## Workflow
 
@@ -107,7 +109,7 @@ Dataset priorities:
 2. Investigate current behavior from source, screen, flow, old QA, meeting note, CSV, API, or existing artifacts when available.
 3. Detect missing rules, contradictions, scope gaps, unclear impacts, hidden assumptions, and possible handling directions.
 4. Classify each candidate QA using `references/qa-groups.md`.
-5. Draft QA in BrSE style with mandatory `Mở bài / Thân bài / Kết bài`, investigation evidence, current understanding, and confirmation points.
+5. Draft QA in BrSE style with mandatory `Mở đầu / Nội dung đang hiểu + điểm cần confirm / Kết thúc`, using only evidence-backed current understanding and confirmation points.
 6. Keep every QA traceable to evidence.
 7. Remove weak, generic, duplicated, or purely paraphrased questions before finalizing.
 
@@ -121,24 +123,22 @@ Preferred phrases:
 - `Về yêu cầu ...`
 - `Theo nội dung meeting ...`
 - `Sau khi điều tra hệ thống hiện tại, chúng tôi nhận thấy ...`
-- `Để thống nhất hướng xử lý ...`
 - `Để tránh hiểu sai nghiệp vụ ...`
-- `Chúng tôi muốn xác nhận thêm các nội dung sau ...`
+- `Chúng tôi muốn confirm thêm các điểm sau:`
 - `Tuy nhiên, hiện tại chưa thấy mô tả rõ ...`
 - `Do đó, chúng tôi đang hiểu rằng ...`
-- `Phương án đối ứng của chúng tôi dự kiến là ...`
-- `Nhờ bác xác nhận giúp nhận thức trên.`
-- `Nhờ bác xác nhận lại nội dung trên.`
-- `Nếu không đúng, phiền bác mô tả rõ hơn.`
+- `Nhờ bác confirm giúp nội dung trên có đúng không?`
 - `Cảm ơn bác.`
 
 Formatting rules:
-- every QA must structurally contain `Mở bài`, `Thân bài`, and `Kết bài`
-- do not print the literal headings `Mở bài`, `Thân bài`, `Kết bài` in normal output
+- every QA must structurally contain `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, and `Kết thúc`
+- standard customer QA mode must return only the final message content
+- do not print the literal headings in normal output
 - separate the 3 parts by one blank line only
-- inside `Thân bài`, allow numbered lists, `① ②`, bullets, or mixed structure when it feels natural
-- allow multiple small confirmation points inside one QA if they belong to the same business issue
+- use numbered lists `1. 2. 3.` for confirm points
+- keep sentences short, polite, and easy to copy
 - keep the writing grounded in actual investigation
+- do not add information not present in the input or evidence
 
 ## Low-Quality QA To Avoid
 
@@ -151,21 +151,23 @@ Do not write questions like:
 Rewrite them into BrSE investigation QA with:
 - full 3-part structure
 - business context
-- investigation result
+- investigation result when available
 - current understanding
-- likely handling direction
 - confirmation request
 
 ## Quality Gates
 
 Every final QA must satisfy all of the following:
-- contains `Mở bài`, `Thân bài`, and `Kết bài` in structure, not necessarily as visible labels
-- shows signs of investigation
+- contains `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, and `Kết thúc` in structure, not necessarily as visible labels
+- standard customer QA mode returns only the final message content
+- shows signs of investigation when evidence exists
 - mentions concrete screens, batch, CSV, table, status, role, or mapping when relevant
 - states the team's current understanding
-- includes a customer confirmation point
+- includes at least one customer confirmation point
 - sounds like a real BrSE Q&A instead of a shallow AI template
 - avoids generic one-line confirmation or abrupt ending right after the question
+- groups complex conditions into short and understandable logic
+- uses polite, short, copyable Vietnamese
 - is backed by evidence or explicitly marked `NOT FOUND IN DOCUMENT`
 
 ## Stop Conditions
@@ -179,6 +181,6 @@ Stop and report the limitation when:
 
 - Use stable identifiers when dataset output requires them.
 - Prefer one business issue per QA, but allow multiple sub-questions inside the same QA when they are tightly connected.
-- When regenerating datasets, every QA must still contain `Mở bài`, `Thân bài`, and `Kết bài` in structure; reject short QA that only says current understanding plus confirmation.
-- When regenerating datasets, use the gold dataset as the source of good ideas, then rewrite into longer investigation QA with context, understanding, and handling direction.
+- When regenerating datasets, every QA must still contain `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, and `Kết thúc` in structure.
+- When regenerating datasets, use the gold dataset as the source of good ideas, then rewrite into evidence-grounded QA with clear context and confirmation points.
 - When the user asks only for standard QA, do not switch to dataset JSONL mode.

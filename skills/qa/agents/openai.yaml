@@ -1,7 +1,7 @@
 interface:
   display_name: "qa"
-  short_description: "BrSE investigation QA for ERP clarification"
-  default_prompt: "Use $qa to draft BrSE investigation QA from the attached spec, gold dataset, and current-system evidence, keeping the output grounded in investigation and structured with opening, body, and closing."
+  short_description: "Customer confirmation QA in concise 3-part Vietnamese format"
+  default_prompt: "Use $qa to draft customer confirmation QA from the attached spec and investigation evidence. Return only the final Vietnamese message, structured in exactly 3 parts: opening, current understanding plus numbered confirm points, and closing."
 
 policy:
   allow_implicit_invocation: true
