@@ -6,7 +6,7 @@ description: Use this skill when the user wants BrSE investigation QA, customer 
 # QA
 
 Create customer clarification QA in concise Vietnamese BrSE style.
-Write like a Vietnamese BrSE who has read the documents, checked the current system, grouped the logic clearly, and is asking the customer to confirm the current understanding.
+Write like a Vietnamese BrSE who has read the documents, checked the current system, and is sending a short, easy-to-understand confirmation message to a business customer.
 
 ## Governance Compliance
 
@@ -27,21 +27,28 @@ Rules:
 This skill is for clarification QA to send to the customer or internal BrSE counterpart.
 
 Do:
-- write every customer QA with exactly 3 mandatory parts in structure: `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, `Kết thúc`
+- write every customer QA with exactly 3 mandatory parts in structure: `Mở đầu`, `Nội dung đang hiểu`, `Các điểm cần confirm`, then close with the required ending
 - open with the exact confirmation sentence pattern required by this skill
 - show the current understanding based only on available evidence
-- group multiple conditions or spec details into clear business logic when relevant
-- list unclear points as numbered confirmation items
-- keep Japanese terms and field names unchanged
-- ask the customer to confirm or correct that understanding
+- summarize the current understanding in short business language, usually within 3 to 5 sentences
+- list 2 to 4 numbered confirmation questions when the evidence supports them
+- keep each confirmation question focused on one idea only
+- write from the user/business-operation point of view whenever possible
+- convert technical wording into customer-friendly wording whenever possible
+- keep the message polite, natural, short, and easy to send to the customer
+- preserve the customer's pronoun style from the input; if the input uses `bác`, the output must use `bác`
 
 Do not:
-- omit one of the three mandatory parts
+- omit one of the mandatory parts
 - generate generic test cases
 - generate implementation design
 - answer the customer's decision on their behalf
 - add handling directions or business rules that are not present in the input or evidence
 - add commentary outside the final customer message in standard QA mode
+- write long investigation reports, internal notes, or implementation suggestions
+- use table names, column names, technical IDs, or database terminology unless the customer already uses them or they are truly necessary for understanding
+- combine multiple unrelated confirmation points into one long sentence
+- force 2 to 4 questions by inventing content that is not supported by evidence
 
 ## Required References
 
@@ -68,27 +75,33 @@ Use by default when the user asks for `QA`, `viet QA`, `lam QA`, customer questi
 Return only the final customer message.
 Do not add headings such as `QA Purpose`, `Analysis`, `Evidence`, or any explanation outside the message.
 
-Every QA must contain exactly these 3 parts:
+Every QA must contain exactly these 3 parts in content flow:
 
 1. `Mở đầu`
-2. `Nội dung đang hiểu + điểm cần confirm`
-3. `Kết thúc`
+2. `Nội dung đang hiểu`
+3. `Các điểm cần confirm`
 
 Use the required wording pattern:
 
 - `Mở đầu`:
   `Liên quan đến yêu cầu [tên yêu cầu/nội dung yêu cầu], chúng tôi đang hiểu như sau và muốn confirm lại với bác:`
-- `Nội dung đang hiểu + điểm cần confirm`:
-  - first, summarize the current understanding in short and clear Vietnamese
-  - then write:
+- `Nội dung đang hiểu`:
+  - summarize the current understanding in short and clear Vietnamese
+  - keep this part concise, normally 3 to 5 sentences maximum
+  - if the source contains technical detail, rewrite it in business wording first
+- `Các điểm cần confirm`:
+  - write exactly:
     `Chúng tôi muốn confirm thêm các điểm sau:`
-  - then list numbered points `1.`, `2.`, `3.` only for unclear or high-risk items that need confirmation
+  - then list numbered points `1.`, `2.`, `3.`, `4.` only for unclear or high-risk items that need confirmation
+  - prefer 2 to 4 questions
+  - each numbered item must ask only one point
+  - if there are multiple possible business directions, write them clearly so the customer can choose
 - `Kết thúc`:
   `Nhờ bác confirm giúp nội dung trên có đúng không?`
   `Cảm ơn bác.`
 
-If there is no confirm point, still keep the 3-part structure and use one numbered item to confirm the overall understanding.
-Do not print the literal labels `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, or `Kết thúc` unless the user explicitly asks for visible headings.
+If the evidence safely supports only one confirmation point, ask one overall confirmation question rather than inventing extra questions.
+Do not print the literal labels `Mở đầu`, `Nội dung đang hiểu`, `Các điểm cần confirm`, or `Kết thúc` unless the user explicitly asks for visible headings.
 
 ### 2. Dataset Mode
 
@@ -101,6 +114,7 @@ Dataset priorities:
 - evidence-grounded current understanding over generic confirmation
 - mandatory 3-part structure over loose free-form QA
 - natural BrSE wording inside that structure
+- business-friendly wording over technical wording unless the source requires technical precision
 - real business ambiguity over paraphrasing the spec
 
 ## Workflow
@@ -109,9 +123,10 @@ Dataset priorities:
 2. Investigate current behavior from source, screen, flow, old QA, meeting note, CSV, API, or existing artifacts when available.
 3. Detect missing rules, contradictions, scope gaps, unclear impacts, hidden assumptions, and possible handling directions.
 4. Classify each candidate QA using `references/qa-groups.md`.
-5. Draft QA in BrSE style with mandatory `Mở đầu / Nội dung đang hiểu + điểm cần confirm / Kết thúc`, using only evidence-backed current understanding and confirmation points.
-6. Keep every QA traceable to evidence.
-7. Remove weak, generic, duplicated, or purely paraphrased questions before finalizing.
+5. Draft QA in short BrSE style with mandatory `Mở đầu / Nội dung đang hiểu / Các điểm cần confirm / Kết thúc`, using only evidence-backed current understanding and confirmation points.
+6. Rewrite technical terms into easier business wording unless the technical term is necessary for customer understanding.
+7. Keep every QA traceable to evidence.
+8. Remove weak, generic, duplicated, overly technical, or purely paraphrased questions before finalizing.
 
 ## Mandatory Writing Style
 
@@ -122,23 +137,44 @@ Preferred phrases:
 - `Về việc ...`
 - `Về yêu cầu ...`
 - `Theo nội dung meeting ...`
-- `Sau khi điều tra hệ thống hiện tại, chúng tôi nhận thấy ...`
+- `Sau khi rà soát tài liệu hiện có, chúng tôi đang hiểu rằng ...`
 - `Để tránh hiểu sai nghiệp vụ ...`
 - `Chúng tôi muốn confirm thêm các điểm sau:`
-- `Tuy nhiên, hiện tại chưa thấy mô tả rõ ...`
+- `Hiện tại chúng tôi chưa thấy mô tả rõ ...`
 - `Do đó, chúng tôi đang hiểu rằng ...`
 - `Nhờ bác confirm giúp nội dung trên có đúng không?`
 - `Cảm ơn bác.`
 
 Formatting rules:
-- every QA must structurally contain `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, and `Kết thúc`
+- every QA must structurally contain `Mở đầu`, `Nội dung đang hiểu`, `Các điểm cần confirm`, and `Kết thúc` in flow, without showing the literal labels in normal output
 - standard customer QA mode must return only the final message content
-- do not print the literal headings in normal output
-- separate the 3 parts by one blank line only
-- use numbered lists `1. 2. 3.` for confirm points
+- separate the main parts by one blank line only
+- use numbered lists `1. 2. 3. 4.` for confirm points
 - keep sentences short, polite, and easy to copy
+- do not let one sentence become longer than about 2 lines if it can be split more clearly
 - keep the writing grounded in actual investigation
 - do not add information not present in the input or evidence
+- prefer business wording such as thao tác, dữ liệu đang chọn, kết quả search, dữ liệu chi tiết, xuất CSV
+- avoid raw technical wording such as table, column, schema, record, technical ID, null, API realtime, batch timing unless the customer needs that detail
+
+## Technical-Term Simplification Rules
+
+When the source contains technical wording, convert it into customer-friendly wording whenever possible.
+
+Examples:
+- `I_RCP_NO` -> `dòng dữ liệu được chọn` or `dữ liệu của phiếu nhập tiền`
+- `I_RCP_DETAIL_NO` -> `dữ liệu chi tiết`
+- `record` -> `dòng dữ liệu`
+- `search result` -> `kết quả search`
+- `export` -> `xuất CSV`
+- `table` / `column` / `schema` -> describe the business data or current data structure in easier wording
+- `ID kỹ thuật` -> the related business object, screen item, or selected data
+
+Only keep raw field names, table names, or Japanese item names when:
+- the customer already uses them in the input, or
+- removing them would make the question ambiguous
+
+Even in those cases, prefer adding an easier business explanation around the term.
 
 ## Low-Quality QA To Avoid
 
@@ -148,26 +184,26 @@ Do not write questions like:
 - `Có validate không?`
 - `Ai được thao tác?`
 
-Rewrite them into BrSE investigation QA with:
+Rewrite them into customer-friendly QA with:
 - full 3-part structure
-- business context
-- investigation result when available
+- short business context
 - current understanding
-- confirmation request
+- 2 to 4 clear confirmation questions when supported by evidence
 
 ## Quality Gates
 
 Every final QA must satisfy all of the following:
-- contains `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, and `Kết thúc` in structure, not necessarily as visible labels
+- contains `Mở đầu`, `Nội dung đang hiểu`, `Các điểm cần confirm`, and `Kết thúc` in structure, not necessarily as visible labels
 - standard customer QA mode returns only the final message content
 - shows signs of investigation when evidence exists
-- mentions concrete screens, batch, CSV, table, status, role, or mapping when relevant
 - states the team's current understanding
 - includes at least one customer confirmation point
+- prefers 2 to 4 confirmation questions when evidence supports them
 - sounds like a real BrSE Q&A instead of a shallow AI template
 - avoids generic one-line confirmation or abrupt ending right after the question
-- groups complex conditions into short and understandable logic
+- groups complex conditions into short and understandable business logic
 - uses polite, short, copyable Vietnamese
+- avoids unnecessary technical or database terminology
 - is backed by evidence or explicitly marked `NOT FOUND IN DOCUMENT`
 
 ## Stop Conditions
@@ -180,7 +216,7 @@ Stop and report the limitation when:
 ## Rules
 
 - Use stable identifiers when dataset output requires them.
-- Prefer one business issue per QA, but allow multiple sub-questions inside the same QA when they are tightly connected.
-- When regenerating datasets, every QA must still contain `Mở đầu`, `Nội dung đang hiểu + điểm cần confirm`, and `Kết thúc` in structure.
+- Prefer one business issue per QA, but allow multiple tightly related confirmation questions inside the same QA.
+- When regenerating datasets, every QA must still contain `Mở đầu`, `Nội dung đang hiểu`, `Các điểm cần confirm`, and `Kết thúc` in structure.
 - When regenerating datasets, use the gold dataset as the source of good ideas, then rewrite into evidence-grounded QA with clear context and confirmation points.
 - When the user asks only for standard QA, do not switch to dataset JSONL mode.

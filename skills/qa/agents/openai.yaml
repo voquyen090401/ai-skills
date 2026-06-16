@@ -1,7 +1,7 @@
 interface:
   display_name: "qa"
-  short_description: "Customer confirmation QA in concise 3-part Vietnamese format"
-  default_prompt: "Use $qa to draft customer confirmation QA from the attached spec and investigation evidence. Return only the final Vietnamese message, structured in exactly 3 parts: opening, current understanding plus numbered confirm points, and closing."
+  short_description: "Customer confirmation QA in short, business-friendly 3-part Vietnamese format"
+  default_prompt: "Use $qa to draft customer confirmation QA from the attached spec and investigation evidence. Return only the final Vietnamese message in 3 parts: opening, short current understanding, and 2-4 clear confirm questions, then closing. Keep the wording polite, easy for business users to read, and avoid technical or database terms unless truly necessary."
 
 policy:
   allow_implicit_invocation: true
