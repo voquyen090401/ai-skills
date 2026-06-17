@@ -1,159 +1,232 @@
 # Output Template
 
-Use the concise customer confirmation style below unless the user explicitly asks for another format.
+Use this document as the source of truth for QA output shape.
 
-## Mandatory Structure
+Do not treat it as a rigid sentence generator.
 
-Every QA must contain all 3 content parts below, then end with the fixed closing:
+## Core Principle
 
-1. `Mở đầu`
-2. `Nội dung đang hiểu`
-3. `Các điểm cần confirm`
-
-If one part is missing, the QA is not acceptable.
-In normal output, do not print the literal labels above; keep them as hidden structure only.
-
-## Core Writing Pattern
-
-Each QA should usually flow like this:
-
-1. `Mở đầu`: Use exactly this sentence pattern: `Liên quan đến yêu cầu [tên yêu cầu/nội dung yêu cầu], chúng tôi đang hiểu như sau và muốn confirm lại với bác:`
-2. `Nội dung đang hiểu`: Summarize the current understanding in a short paragraph, usually within 3 to 5 sentences
-3. `Các điểm cần confirm`: Write `Chúng tôi muốn confirm thêm các điểm sau:` and list the numbered confirmation points
-4. `Kết thúc`: Close with exactly:
-   `Nhờ bác confirm giúp nội dung trên có đúng không?`
-   `Cảm ơn bác.`
-
-Keep exactly one blank line between these parts.
-In standard customer QA mode, output only the final message content.
-
-## Required Writing Rules
-
-- Keep the tone polite, natural, short, and easy to send to the customer.
-- Keep the writing easy for a business user to read.
-- Do not add information that is not present in the input or evidence.
-- If the input has many conditions or spec rules, group them into easier business logic without changing the meaning.
-- If a point is unclear, move it into the numbered confirmation list.
-- Prefer 2 to 4 confirmation questions when the evidence supports them.
-- Each question must ask only one point.
-- If there are multiple business possibilities, write them clearly so the customer can choose.
-- Use `1. 2. 3. 4.` numbering only.
-- Do not write overly long or complicated sentences.
-- If one sentence becomes too long, split it into shorter sentences.
-
-## Technical-Term Simplification Rules
-
-- Avoid table names, column names, schema names, technical IDs, and raw database wording unless the customer already uses them or truly needs them.
-- Convert technical wording into easier business wording whenever possible.
-
-Examples:
-- `I_RCP_NO` -> `dòng dữ liệu được chọn` or `dữ liệu của phiếu nhập tiền`
-- `I_RCP_DETAIL_NO` -> `dữ liệu chi tiết`
-- `record` -> `dòng dữ liệu`
-- `search result` -> `kết quả search`
-- `export` -> `xuất CSV`
-
-If a Japanese term, field name, or technical name must remain for accuracy, wrap it in an easier business explanation.
-
-## Preferred Natural Pattern
+Every QA should follow this business flow:
 
 ```text
-Liên quan đến yêu cầu [ABC], chúng tôi đang hiểu như sau và muốn confirm lại với bác:
-
-[Viết ngắn gọn phần đang hiểu tại đây, tối đa 3 đến 5 câu. Ưu tiên mô tả theo thao tác, màn hình, dữ liệu người dùng nhìn thấy, hoặc luồng nghiệp vụ.]
-
-Chúng tôi muốn confirm thêm các điểm sau:
-
-1. [Câu hỏi confirm 1]
-2. [Câu hỏi confirm 2]
-3. [Câu hỏi confirm 3]
-
-Nhờ bác confirm giúp nội dung trên có đúng không?
-Cảm ơn bác.
+Yêu cầu hoặc vị trí trong tài liệu
+→ Nhận thức nghiệp vụ hiện tại
+→ Phân chia từng trường hợp hoặc từng nhóm nội dung khi cần
+→ Điểm chưa xác định được
+→ Câu hỏi xác nhận với khách hàng
 ```
 
-## Example A
+## Mandatory Outcome
+
+Every QA must:
+
+- open with concrete scope
+- show the team's current understanding before asking
+- include at least one point that still needs confirmation
+- preserve important screen names, sheet names, line numbers, item names, status names, and Japanese terms when available
+- close politely
+
+Never print internal headings such as:
+
+- `■ Bối cảnh`
+- `■ Nhận thức hiện tại`
+- `■ Câu hỏi xác nhận`
+
+## Accepted Formats
+
+### Format A: Confirm Multiple Understandings
 
 ```text
-Liên quan đến yêu cầu bổ sung thông tin tiêu chuẩn tại màn hình AAA, chúng tôi đang hiểu như sau và muốn confirm lại với bác:
+Liên quan đến [nội dung], chúng tôi đang hiểu nghiệp vụ như sau:
 
-Theo tài liệu hiện tại, thông tin này được nhập tại màn hình AAA. Ngoài ra, một số màn hình khác và file xuất CSV cũng đang dùng lại cùng dữ liệu này. Vì vậy, chúng tôi đang hiểu rằng khi bổ sung nội dung trên, các chỗ đang hiển thị hoặc sử dụng cùng dữ liệu cũng cần được xử lý đồng bộ để tránh lệch nghiệp vụ.
+1. ...
+2. ...
+3. ...
 
-Chúng tôi muốn confirm thêm các điểm sau:
-
-1. Các màn hình BBB, CCC và file xuất CSV liên quan có nằm trong cùng phạm vi xử lý của yêu cầu này không?
-2. Nếu có chức năng chỉ cần giữ dữ liệu cũ mà không cần hiển thị nội dung mới, mong bác chỉ rõ giúp phạm vi.
-3. Trong release này, chúng tôi có thể hiểu là cách lưu dữ liệu hiện tại vẫn giữ nguyên, đúng không?
-
-Nhờ bác confirm giúp nội dung trên có đúng không?
-Cảm ơn bác.
+Nhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?
 ```
 
-## Example B
+### Format B: Group By Topic
 
 ```text
-Liên quan đến yêu cầu về các màn hình chưa được mô tả trong sheet XXX, chúng tôi đang hiểu như sau và muốn confirm lại với bác:
+Liên quan đến [nội dung], chúng tôi muốn xác nhận nhận thức như sau:
 
-Trong tài liệu hiện tại, các màn hình AAA, BBB và CCC đang được liệt kê là đối tượng liên quan. Tuy nhiên, chúng tôi chưa thấy mô tả thay đổi cụ thể cho các màn hình này. Vì vậy, hiện tại chúng tôi đang hiểu rằng các màn hình trên sẽ giữ nguyên xử lý hiện tại nếu không có chỉ định bổ sung.
+1. Về [nhóm nội dung A]:
+...
 
-Chúng tôi muốn confirm thêm các điểm sau:
+2. Về [nhóm nội dung B]:
+...
 
-1. AAA, BBB và CCC sẽ giữ nguyên xử lý hiện tại trong release này, đúng không?
-2. Nếu vẫn có màn hình cần chỉnh sửa nhưng chưa được mô tả trong sheet XXX, mong bác chỉ rõ tên màn hình và nội dung thay đổi.
-
-Nhờ bác confirm giúp nội dung trên có đúng không?
-Cảm ơn bác.
+Nhờ Bác xác nhận giúp chúng tôi các nội dung trên.
 ```
 
-## Writing Checklist
+### Format C: Group By Business Case
 
-Before finalizing each QA, confirm:
-- `Mở đầu` exists and uses the required sentence pattern
-- `Nội dung đang hiểu` exists and contains a short current-understanding paragraph
-- `Các điểm cần confirm` exists and contains numbered confirmation questions
-- `Kết thúc` exists and uses the required closing lines
-- The final QA does not print literal labels unless explicitly requested.
-- The parts are separated by one blank line only.
-- The wording sounds natural for a business customer.
-- The current understanding is explicit.
-- The numbered list contains only true confirmation points.
-- The final text avoids unnecessary technical terms.
-- No extra information was added beyond the input or evidence.
+```text
+Liên quan đến [nội dung], chúng tôi đang hiểu nghiệp vụ như sau:
 
-## Weak Patterns To Avoid
+1. [Rule chung]
+
+2. Trường hợp [điều kiện A]:
+   - ...
+
+3. Trường hợp [điều kiện B]:
+   - ...
+
+Nhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?
+```
+
+### Format D: State Transition
+
+```text
+Liên quan đến [điều kiện hoặc item], chúng tôi đang hiểu nghiệp vụ như sau:
+
+1. Khi [điều kiện được thỏa]:
+   - ...
+
+2. Khi [điều kiện không được thỏa]:
+   - ...
+
+Nhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?
+```
+
+### Format E: Proposal
+
+```text
+Liên quan đến [nội dung], chúng tôi đang hiểu nghiệp vụ như sau:
+
+1. ...
+2. Tuy nhiên chúng tôi nhận thấy...
+3. Do đó chúng tôi đề xuất...
+
+Nhờ Bác xác nhận giúp hướng xử lý trên có phù hợp không ạ?
+```
+
+## Opening Rules
+
+When the input contains them, keep these in the opening:
+
+- screen name
+- screen code
+- sheet name
+- line number
+- block name
+- item name
+- function name
+- status name
+- Japanese term
+
+Good:
+
+```text
+Liên quan đến phần 検索結果 được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi muốn xác nhận nhận thức như sau:
+```
 
 Avoid:
 
 ```text
-- Field này có required không?
-- Có export CSV không?
-- Có validate không?
-- Ai được thao tác?
+Liên quan đến yêu cầu trên...
 ```
 
-Rewrite them into short, business-friendly QA with evidence and current understanding.
+## Writing Rules
 
-## Dataset Output
+- present current understanding first
+- keep direct questions tied to that understanding
+- split by topic when one QA covers different business concerns
+- split by case when the logic depends on specific conditions
+- keep exact business conditions from the input
+- keep wording natural and polite
+- prefer short sentences
 
-For dataset regeneration, each line must be one JSON object:
+Preferred phrases:
 
-```json
-{
-  "id": "BI-QA-0001",
-  "category": "impact_investigation",
-  "module": "MA10",
-  "screen": "MA1010",
-  "topic": "standard_time_reference_items",
-  "style": "investigation_confirm",
-  "source_pattern": "impact_list_screens",
-  "difficulty": "high",
-  "qa": "..."
-}
+- `Chúng tôi đang hiểu...`
+- `Chúng tôi đang nhận thức...`
+- `Chúng tôi hiểu nghiệp vụ như sau...`
+- `Nếu cách hiểu trên là đúng...`
+- `Nhờ Bác cho biết...`
+- `Nhờ Bác xác nhận giúp...`
+
+## Good Examples
+
+### Good Example: Mapping Clarification
+
+```text
+Liên quan đến phần 検索結果 được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi đang hiểu nghiệp vụ như sau:
+
+1. Màn hình đang thống kê kết quả theo từng 品目中分類.
+2. Giá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó.
+3. Chưa rõ 品目中分類 được tham chiếu từ master nào.
+
+Nhờ Bác xác nhận thêm giúp các điểm sau:
+1. các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?
+2. đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?
+
+Nhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?
 ```
 
-Rules:
-- Every QA must contain `Mở đầu`, `Nội dung đang hiểu`, `Các điểm cần confirm`, and `Kết thúc` in structure.
-- Every QA must include at least one investigation element.
-- Prefer natural flow and high information density.
-- Prefer clear context, understanding, and confirmation points over short confirm-only QA.
-- Quality is more important than count.
+### Good Example: Case Split
+
+```text
+Liên quan đến đối tượng nhận email được mô tả tại line 467-469 của màn hình 新規 作図実績（NEW）, chúng tôi đang hiểu nghiệp vụ như sau:
+
+1. Đối tượng nhận email được chia theo từng điều kiện của 販売部門.
+
+2. Trường hợp 「販売部門 = 19」:
+   - gửi cho 得意先 trên Order
+
+3. Trường hợp 「販売部門 <> 19」:
+   - tham chiếu Master Bộ phận nhận để lấy địa chỉ email
+
+Nhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?
+```
+
+## Bad Examples
+
+### Bad Example: Direct Questions Only
+
+```text
+1. Có ảnh hưởng CSV không?
+2. Có ảnh hưởng batch không?
+3. Có dùng master nào không?
+```
+
+Why bad:
+
+- no current understanding
+- asks broad questions without evidence
+- easy to hallucinate scope
+
+### Bad Example: Old Internal Template
+
+```text
+■ Bối cảnh
+...
+■ Nhận thức hiện tại
+...
+■ Câu hỏi xác nhận
+...
+```
+
+Why bad:
+
+- internal heading style must not be sent to the customer
+
+## Hard Avoids
+
+Do not:
+
+- ask direct isolated questions with no understanding
+- fabricate other screens, CSV, batch, API, DB, authority, master, or phase information
+- force the old phrase `Theo tài liệu hiện tại...` into every QA
+- create a fixed `Tuy nhiên hiện chưa rõ...` paragraph when the issue can be placed naturally right after the related understanding
+- replace exact conditions such as `販売部門 = 19` with vague paraphrases
+
+## Dataset Notes
+
+For dataset records:
+
+- each JSON object must be on one physical line
+- keep the QA natural, not templated
+- preserve the source scope and exact terms
+- allow multiple accepted formats

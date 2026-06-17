@@ -1,7 +1,7 @@
 interface:
   display_name: "qa"
-  short_description: "Customer confirmation QA in short, business-friendly 3-part Vietnamese format"
-  default_prompt: "Use $qa to draft customer confirmation QA from the attached spec and investigation evidence. Return only the final Vietnamese message in 3 parts: opening, short current understanding, and 2-4 clear confirm questions, then closing. Keep the wording polite, easy for business users to read, and avoid technical or database terms unless truly necessary."
+  short_description: "Customer-ready BrSE QA with explicit business understanding and evidence-bound confirmation points"
+  default_prompt: "Use $qa to draft Vietnamese BrSE clarification QA from the provided evidence. Follow the QA skill instructions and reference files. Preserve exact screen, sheet, line, item, and Japanese business terms when available. Return only the final Vietnamese customer message unless the user explicitly asks for dataset output."
 
 policy:
   allow_implicit_invocation: true

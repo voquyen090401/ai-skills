@@ -1,0 +1,548 @@
+﻿[
+  {
+    "id": "FIX-001",
+    "category": "mapping",
+    "module": "MA10",
+    "screen": "作図・出図状況一覧",
+    "topic": "search_result_group_and_count_unit",
+    "difficulty": "high",
+    "focus_label": "phần 検索結果",
+    "source_reference": { "screen": "作図・出図状況一覧", "lines": ["659"] },
+    "input_context": "Màn hình 作図・出図状況一覧. Line 659 mô tả phần 検索結果. Có các hàng theo 品目中分類 và các ô theo ngày/trạng thái.",
+    "evidence": [
+      "Line 659 mô tả bảng kết quả search theo 品目中分類.",
+      "Các ô trong bảng được chia theo ngày và trạng thái."
+    ],
+    "current_understanding": [
+      "Chúng tôi đang hiểu màn hình này thống kê tình trạng hoặc tiến độ 作図・出図 theo từng 品目中分類.",
+      "Giá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó."
+    ],
+    "unclear_points": [
+      "Chưa rõ 品目中分類 được tham chiếu từ master hoặc thông tin nào.",
+      "Chưa rõ đơn vị thống kê là 件数 hay 製番."
+    ],
+    "confirmation_points": [
+      "các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?",
+      "đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?"
+    ],
+    "must_contain": ["line 659", "品目中分類", "Nhờ Bác"],
+    "must_not_contain": ["■ Bối cảnh", "Theo tài liệu hiện tại"]
+  },
+  {
+    "id": "FIX-002",
+    "category": "notification",
+    "module": "MA10",
+    "screen": "新規 作図実績（NEW）",
+    "topic": "mail_recipient_department_19",
+    "difficulty": "high",
+    "focus_label": "đối tượng nhận email",
+    "source_reference": { "sheet": "MA10", "screen": "新規 作図実績（NEW）", "lines": ["467-469"] },
+    "input_context": "Sheet MA10. Màn hình 新規 作図実績（NEW）. Line 467-469 mô tả đối tượng nhận email. 販売部門 có thể xác định từ 室コード tại CA3020.",
+    "evidence": [
+      "販売部門 được xác định từ item 室コード tại CA3020.",
+      "販売部門 = 19 thì gửi 得意先 trên Order.",
+      "販売部門 <> 19 thì dùng 室コード để tham chiếu 部署中分類 và lấy mail."
+    ],
+    "current_understanding": [
+      "販売部門 được xác định bằng cách tham chiếu item 「室コード」 tại màn hình CA3020.",
+      "Trường hợp 「販売部門 = 19」 thì đối tượng nhận thông báo là 「得意先」 được đăng ký trên Order.",
+      "Trường hợp 「販売部門 <> 19」 thì hệ thống tham chiếu Master Bộ phận nhận（部署中分類）để xác định địa chỉ email tương ứng."
+    ],
+    "unclear_points": [
+      "Chưa rõ Master Bộ phận nhận（部署中分類）có được tạo mới trong yêu cầu này hay không."
+    ],
+    "confirmation_points": [
+      "Master Bộ phận nhận（部署中分類）sẽ được tạo mới trong yêu cầu phát triển lần này đúng không?",
+      "trường hợp 「販売部門 <> 19」 có cần gửi đồng thời cho 得意先 hay chỉ gửi cho địa chỉ email lấy từ 部署中分類?"
+    ],
+    "must_contain": ["line 467-469", "販売部門 = 19", "販売部門 <> 19"],
+    "must_not_contain": ["■ Nhận thức hiện tại", "phase"]
+  },
+  {
+    "id": "FIX-003",
+    "category": "search_item",
+    "module": "MA10",
+    "screen": "MA1030 出図実績入力",
+    "topic": "checkbox_button_status",
+    "difficulty": "medium",
+    "focus_label": "điều kiện search 「取戻対象表示」",
+    "source_reference": { "screen": "MA1030 出図実績入力", "lines": ["568", "584"] },
+    "input_context": "MA1030 出図実績入力. Line 568 bổ sung điều kiện search 取戻対象表示. Line 584 mô tả hai column trạng thái button.",
+    "evidence": [
+      "Checkbox 「取戻対象表示」 được bổ sung tại line 568.",
+      "Line 584 mô tả hai cột trạng thái button: Khi check hiển thị đối tượng 取戻 và trạng thái thông thường."
+    ],
+    "current_understanding": [
+      "Khi người dùng check vào checkbox 「取戻対象表示」, trạng thái các button trên màn hình sẽ hiển thị theo cột 「Khi check hiển thị đối tượng 取戻」 được mô tả tại line 584.",
+      "Khi người dùng không check vào checkbox 「取戻対象表示」, trạng thái các button sẽ hiển thị theo cột 「Trạng thái thông thường」 được mô tả tại line 584."
+    ],
+    "unclear_points": [
+      "Chưa rõ khi đổi trạng thái checkbox có cần refresh lại toàn bộ kết quả search hay chỉ đổi trạng thái button."
+    ],
+    "confirmation_points": [
+      "khi người dùng check vào checkbox 「取戻対象表示」 thì trạng thái button sẽ bám theo cột 「Khi check hiển thị đối tượng 取戻」 đúng không?",
+      "khi người dùng không check vào checkbox 「取戻対象表示」 thì trạng thái button sẽ bám theo cột 「Trạng thái thông thường」 đúng không?"
+    ],
+    "must_contain": ["line 568", "line 584", "取戻対象表示"],
+    "must_not_contain": ["■ Câu hỏi xác nhận", "CSV"]
+  },
+  {
+    "id": "FIX-004",
+    "category": "csv_output",
+    "module": "EA10",
+    "screen": "EA1044",
+    "topic": "csv_mapping_sources",
+    "difficulty": "medium",
+    "focus_label": "các item CSV output của EA1044",
+    "source_reference": { "screen": "EA1044" },
+    "input_context": "EA1044 CSV export. Chưa rõ nguồn của 得意先ﾚｰﾄ, 得意先FAX番号 và 月.",
+    "evidence": [
+      "EA1044 có các item output 得意先ﾚｰﾄ, 得意先FAX番号 và 月.",
+      "Tài liệu hiện tại chưa chỉ rõ nguồn tham chiếu và rule lấy dữ liệu của ba item này."
+    ],
+    "current_understanding": [
+      "Chúng tôi chưa xác định được item 得意先ﾚｰﾄ được lấy từ thông tin rate trong master khách hàng hay từ dữ liệu giao dịch.",
+      "Chúng tôi đang hiểu item 得意先FAX番号 có thể được lấy từ số FAX đăng ký trong master khách hàng.",
+      "Chúng tôi chưa rõ item 月 thể hiện tháng phát sinh giao dịch, tháng xử lý hay tháng xuất CSV."
+    ],
+    "unclear_points": [
+      "Chưa rõ nguồn tham chiếu và rule lấy dữ liệu của ba item output."
+    ],
+    "confirmation_points": [
+      "nguồn tham chiếu của item 得意先ﾚｰﾄ là thông tin rate trong master khách hàng hay dữ liệu giao dịch?",
+      "item 得意先FAX番号 có được lấy từ số FAX đăng ký trong master khách hàng đúng không?",
+      "item 月 thể hiện tháng phát sinh giao dịch, tháng xử lý hay tháng xuất CSV?"
+    ],
+    "must_contain": ["得意先ﾚｰﾄ", "得意先FAX番号", "月"],
+    "must_not_contain": ["■ Bối cảnh", "batch"]
+  },
+  {
+    "id": "FIX-005",
+    "category": "multi_rule",
+    "module": "FA30",
+    "screen": "FA3020",
+    "topic": "unfinished_reallocation_priority",
+    "difficulty": "medium",
+    "focus_label": "phần 「再手配分」 ở block 「手配情報」",
+    "source_reference": { "screen": "FA3020" },
+    "input_context": "FA3020. Cần đưa 再手配 chưa hoàn thành lên trên. Chưa rõ dựa vào đâu xác định 完了 và 未完了.",
+    "evidence": [
+      "Record 再手配 chưa hoàn thành sẽ được ưu tiên hiển thị ở phía trên.",
+      "Trong nhóm 再手配 chưa hoàn thành, dữ liệu sẽ được sắp xếp theo 計画納期."
+    ],
+    "current_understanding": [
+      "Các record 「再手配」 chưa hoàn thành sẽ được ưu tiên hiển thị ở phía trên để người dùng dễ theo dõi.",
+      "Trong nhóm record 「再手配」 chưa hoàn thành, dữ liệu sẽ được sắp xếp theo 「計画納期」."
+    ],
+    "unclear_points": [
+      "Chưa xác định được điều kiện dùng để phân biệt record đã hoàn thành và chưa hoàn thành."
+    ],
+    "confirmation_points": [
+      "việc xác định trạng thái hoàn thành có dựa vào item 「完納区分」 hay không?",
+      "nếu không dựa vào 「完納区分」 thì item hoặc điều kiện nào sẽ được sử dụng để phân biệt 完了 và 未完了?"
+    ],
+    "must_contain": ["再手配", "計画納期", "完納区分"],
+    "must_not_contain": ["■ Bối cảnh", "API"]
+  },
+  {
+    "id": "FIX-006",
+    "category": "master_data",
+    "module": "MA10",
+    "screen": "作図・出図状況一覧",
+    "topic": "group_master_source",
+    "difficulty": "medium",
+    "focus_label": "nhóm 品目中分類",
+    "source_reference": { "screen": "作図・出図状況一覧", "lines": ["659"] },
+    "input_context": "Line 659 chưa rõ 品目中分類 lấy từ đâu.",
+    "evidence": [
+      "Bảng kết quả search đang hiển thị hàng theo 品目中分類.",
+      "Tài liệu hiện tại chưa chỉ rõ master nguồn của 品目中分類."
+    ],
+    "current_understanding": [
+      "Màn hình đang thống kê kết quả theo từng 品目中分類.",
+      "Để hiển thị ổn định, hệ thống cần có nguồn master hoặc quy tắc xác định rõ ràng cho 品目中分類."
+    ],
+    "unclear_points": [
+      "Chưa rõ 品目中分類 được tham chiếu từ master nào."
+    ],
+    "confirmation_points": [
+      "các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?"
+    ],
+    "must_contain": ["品目中分類", "line 659"],
+    "must_not_contain": ["CSV", "batch"]
+  },
+  {
+    "id": "FIX-007",
+    "category": "mapping",
+    "module": "MA10",
+    "screen": "作図・出図状況一覧",
+    "topic": "count_unit",
+    "difficulty": "medium",
+    "focus_label": "giá trị hiển thị trong từng ô của bảng kết quả",
+    "source_reference": { "screen": "作図・出図状況一覧", "lines": ["659"] },
+    "input_context": "Chưa rõ giá trị trong ô đếm record hay 製番.",
+    "evidence": [
+      "Mỗi ô trong bảng đang hiển thị một giá trị thống kê theo ngày và trạng thái."
+    ],
+    "current_understanding": [
+      "Giá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó."
+    ],
+    "unclear_points": [
+      "Chưa rõ đơn vị thống kê là 件数 hay 製番."
+    ],
+    "confirmation_points": [
+      "đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?"
+    ],
+    "must_contain": ["件数", "製番"],
+    "must_not_contain": ["■", "master nào khác"]
+  },
+  {
+    "id": "FIX-008",
+    "category": "notification",
+    "module": "MA10",
+    "screen": "新規 作図実績（NEW）",
+    "topic": "mail_recipient",
+    "difficulty": "high",
+    "focus_label": "đối tượng nhận email",
+    "source_reference": { "sheet": "MA10", "screen": "新規 作図実績（NEW）", "lines": ["467-469"] },
+    "input_context": "Line 467-469 mô tả đối tượng nhận email.",
+    "evidence": [
+      "販売部門 = 19 thì gửi 得意先 trên Order.",
+      "販売部門 <> 19 thì lấy mail từ 部署中分類."
+    ],
+    "current_understanding": [
+      "Đối tượng nhận email được tách theo từng điều kiện của 販売部門.",
+      "Trường hợp 「販売部門 = 19」 thì gửi cho 「得意先」 trên Order.",
+      "Trường hợp 「販売部門 <> 19」 thì tham chiếu Master Bộ phận nhận để lấy địa chỉ email."
+    ],
+    "unclear_points": [
+      "Chưa rõ rule khi Master Bộ phận nhận chưa có dữ liệu email."
+    ],
+    "confirmation_points": [
+      "trường hợp 「販売部門 = 19」 có chỉ gửi cho 得意先 trên Order đúng không?",
+      "trường hợp 「販売部門 <> 19」 có chỉ tham chiếu địa chỉ email từ 部署中分類 đúng không?"
+    ],
+    "must_contain": ["販売部門 = 19", "販売部門 <> 19"],
+    "must_not_contain": ["CSV", "batch"]
+  },
+  {
+    "id": "FIX-009",
+    "category": "search_item",
+    "module": "MA10",
+    "screen": "MA1030 出図実績入力",
+    "topic": "checkbox_dual_rule",
+    "difficulty": "medium",
+    "focus_label": "checkbox 「取戻対象表示」",
+    "source_reference": { "screen": "MA1030 出図実績入力", "lines": ["568", "584"] },
+    "input_context": "Check và uncheck có hai rule khác nhau.",
+    "evidence": [
+      "Checkbox 「取戻対象表示」 thay đổi trạng thái button theo hai cột mô tả."
+    ],
+    "current_understanding": [
+      "Khi check vào checkbox, màn hình hiển thị trạng thái button theo cột dành cho đối tượng 取戻.",
+      "Khi không check, màn hình hiển thị trạng thái button theo cột trạng thái thông thường."
+    ],
+    "unclear_points": [
+      "Chưa rõ khi chuyển đổi checkbox có cần search lại dữ liệu hay không."
+    ],
+    "confirmation_points": [
+      "khi check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột 「Khi check hiển thị đối tượng 取戻」 đúng không?",
+      "khi không check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột 「Trạng thái thông thường」 đúng không?"
+    ],
+    "must_contain": ["取戻対象表示", "Khi check", "Trạng thái thông thường"],
+    "must_not_contain": ["■", "API"]
+  },
+  {
+    "id": "FIX-010",
+    "category": "csv_output",
+    "module": "EA10",
+    "screen": "EA1044",
+    "topic": "multiple_output_sources",
+    "difficulty": "medium",
+    "focus_label": "các item output chưa rõ nguồn của EA1044",
+    "source_reference": { "screen": "EA1044" },
+    "input_context": "CSV có nhiều item chưa rõ nguồn.",
+    "evidence": [
+      "EA1044 có ít nhất ba item output chưa rõ nguồn là 得意先ﾚｰﾄ, 得意先FAX番号 và 月."
+    ],
+    "current_understanding": [
+      "Chúng tôi đang tách riêng từng item để tránh hiểu nhầm nguồn dữ liệu.",
+      "Mỗi item có khả năng tham chiếu từ nguồn khác nhau nên cần xác nhận riêng từng trường hợp."
+    ],
+    "unclear_points": [
+      "Chưa rõ nguồn và rule lấy dữ liệu của nhiều item output."
+    ],
+    "confirmation_points": [
+      "nguồn của item 得意先ﾚｰﾄ là từ master khách hàng hay dữ liệu giao dịch?",
+      "item 得意先FAX番号 có lấy từ số FAX trong master khách hàng đúng không?",
+      "item 月 thể hiện tháng giao dịch, tháng xử lý hay tháng xuất CSV?"
+    ],
+    "must_contain": ["得意先ﾚｰﾄ", "得意先FAX番号", "月"],
+    "must_not_contain": ["■ Bối cảnh", "batch"]
+  },
+  {
+    "id": "FIX-011",
+    "category": "multi_rule",
+    "module": "MA10",
+    "screen": "MA1030 出図実績入力",
+    "topic": "multiple_understanding",
+    "difficulty": "medium",
+    "focus_label": "rule thay đổi trạng thái button",
+    "source_reference": { "screen": "MA1030 出図実績入力", "lines": ["568", "584"] },
+    "input_context": "Một QA có nhiều nhận thức trong cùng nội dung.",
+    "evidence": [
+      "Checkbox mới tác động đến button state.",
+      "Có hai cột trạng thái button tương ứng với hai điều kiện."
+    ],
+    "current_understanding": [
+      "Checkbox mới chỉ ảnh hưởng đến trạng thái button chứ không làm thay đổi dữ liệu nghiệp vụ gốc.",
+      "Rule hiển thị khi check và khi không check được mô tả tách biệt trong tài liệu.",
+      "Để người dùng dễ hiểu, hai trường hợp cần được xác nhận riêng thay vì gộp vào một câu dài."
+    ],
+    "unclear_points": [
+      "Chưa rõ có cần refresh lại search result khi đổi checkbox hay không."
+    ],
+    "confirmation_points": [
+      "khi check vào checkbox thì màn hình chỉ đổi trạng thái button, không đổi dữ liệu gốc đúng không?",
+      "khi không check thì hệ thống quay lại rule hiển thị button thông thường đúng không?"
+    ],
+    "must_contain": ["checkbox", "button"],
+    "must_not_contain": ["■ Nhận thức hiện tại"]
+  },
+  {
+    "id": "FIX-012",
+    "category": "scope_keep",
+    "module": "MA10",
+    "screen": "MA1032",
+    "topic": "keep_without_line",
+    "difficulty": "medium",
+    "focus_label": "phạm vi xử lý của MA1032",
+    "source_reference": { "screen": "MA1032" },
+    "input_context": "Input không có line, chỉ nói MA1032 được liệt kê KEEP nhưng không có detail spec.",
+    "evidence": [
+      "MA1032 được liệt kê trong danh sách đối tượng hệ thống nhưng không có detail spec trong sheet mục tiêu."
+    ],
+    "current_understanding": [
+      "Nếu không có chỉ thị khác, MA1032 sẽ giữ nguyên xử lý hiện tại.",
+      "Chỉ những thay đổi bắt buộc do dữ liệu upstream đổi cấu trúc mới cần được xem xét."
+    ],
+    "unclear_points": [
+      "Chưa rõ MA1032 có nằm ngoài phạm vi thay đổi của đợt này hoàn toàn hay không."
+    ],
+    "confirmation_points": [
+      "MA1032 có nằm ngoài phạm vi thay đổi của lần này đúng không?"
+    ],
+    "must_contain": ["MA1032"],
+    "must_not_contain": ["line ", "■"]
+  },
+  {
+    "id": "FIX-013",
+    "category": "mapping",
+    "module": "MA10",
+    "screen": "作図・出図状況一覧",
+    "topic": "mixed_vi_ja",
+    "difficulty": "medium",
+    "focus_label": "phần 検索結果",
+    "source_reference": { "screen": "作図・出図状況一覧", "sheet": "MA10", "lines": ["659"] },
+    "input_context": "Input Việt–Nhật kết hợp: Màn hình 作図・出図状況一覧, line 659, phần 検索結果 và item 品目中分類.",
+    "evidence": [
+      "Input có dùng đồng thời thuật ngữ Việt và Nhật.",
+      "Các term 作図・出図状況一覧, 検索結果, 品目中分類 cần được giữ nguyên."
+    ],
+    "current_understanding": [
+      "QA cần giữ nguyên các thuật ngữ Nhật quan trọng để tránh lệch nghiệp vụ.",
+      "Phần diễn giải xung quanh vẫn nên dùng tiếng Việt tự nhiên để khách hàng dễ theo dõi."
+    ],
+    "unclear_points": [
+      "Chưa rõ nguồn của 品目中分類."
+    ],
+    "confirmation_points": [
+      "các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?"
+    ],
+    "must_contain": ["作図・出図状況一覧", "検索結果", "品目中分類"],
+    "must_not_contain": ["dịch sang tiếng Việt hoàn toàn"]
+  },
+  {
+    "id": "FIX-014",
+    "category": "mapping",
+    "module": "MA10",
+    "screen": "作図・出図状況一覧",
+    "topic": "no_extra_impacted_screen",
+    "difficulty": "medium",
+    "focus_label": "phần 検索結果",
+    "source_reference": { "screen": "作図・出図状況一覧", "lines": ["659"] },
+    "input_context": "Không được bịa màn hình ảnh hưởng.",
+    "evidence": [
+      "Input chỉ nói về màn hình 作図・出図状況一覧 và line 659."
+    ],
+    "current_understanding": [
+      "Nội dung cần xác nhận hiện chỉ giới hạn trong phần 検索結果 của 作図・出図状況一覧."
+    ],
+    "unclear_points": [
+      "Chưa rõ nguồn của 品目中分類."
+    ],
+    "confirmation_points": [
+      "các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?"
+    ],
+    "must_contain": ["作図・出図状況一覧"],
+    "must_not_contain": ["MA1011", "FA1030", "CSV"]
+  },
+  {
+    "id": "FIX-015",
+    "category": "mapping",
+    "module": "MA10",
+    "screen": "作図・出図状況一覧",
+    "topic": "no_extra_csv_batch",
+    "difficulty": "medium",
+    "focus_label": "giá trị thống kê trong từng ô",
+    "source_reference": { "screen": "作図・出図状況一覧", "lines": ["659"] },
+    "input_context": "Không được tự thêm CSV hoặc batch.",
+    "evidence": [
+      "Input chỉ yêu cầu xác nhận đơn vị thống kê trong từng ô."
+    ],
+    "current_understanding": [
+      "Giá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó."
+    ],
+    "unclear_points": [
+      "Chưa rõ đơn vị thống kê là 件数 hay 製番."
+    ],
+    "confirmation_points": [
+      "đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?"
+    ],
+    "must_contain": ["件数", "製番"],
+    "must_not_contain": ["CSV", "batch"]
+  },
+  {
+    "id": "FIX-016",
+    "category": "scope_keep",
+    "module": "MA10",
+    "screen": "MA1032",
+    "topic": "avoid_old_template",
+    "difficulty": "medium",
+    "focus_label": "phạm vi KEEP của MA1032",
+    "source_reference": { "screen": "MA1032" },
+    "input_context": "Không được ép output vào template Theo tài liệu hiện tại.",
+    "evidence": [
+      "MA1032 chỉ được liệt kê KEEP, chưa có detail spec."
+    ],
+    "current_understanding": [
+      "Nếu không có chỉ thị khác, MA1032 sẽ giữ nguyên xử lý hiện tại."
+    ],
+    "unclear_points": [
+      "Chưa rõ có cần design riêng cho MA1032 hay không."
+    ],
+    "confirmation_points": [
+      "MA1032 có thể được treat là KEEP và không cần design riêng đúng không?"
+    ],
+    "must_contain": ["Liên quan đến"],
+    "must_not_contain": ["Theo tài liệu hiện tại", "■ Bối cảnh"]
+  },
+  {
+    "id": "FIX-017",
+    "category": "notification",
+    "module": "MA10",
+    "screen": "新規 作図実績（NEW）",
+    "topic": "preserve_exact_condition",
+    "difficulty": "high",
+    "focus_label": "đối tượng nhận email",
+    "source_reference": { "sheet": "MA10", "screen": "新規 作図実績（NEW）", "lines": ["467-469"] },
+    "input_context": "Phải giữ chính xác điều kiện 販売部門 = 19 và 販売部門 <> 19.",
+    "evidence": [
+      "Tài liệu phân chia đối tượng nhận mail theo đúng hai điều kiện 販売部門 = 19 và 販売部門 <> 19."
+    ],
+    "current_understanding": [
+      "Đối tượng nhận email được chia theo đúng từng điều kiện nghiệp vụ đang có trong tài liệu.",
+      "Không nên đổi cách diễn đạt của điều kiện sang một nhóm khái niệm chung khác."
+    ],
+    "unclear_points": [
+      "Chưa rõ khi 販売部門 <> 19 nhưng không tìm thấy mail trong 部署中分類 thì xử lý như thế nào."
+    ],
+    "confirmation_points": [
+      "trường hợp 「販売部門 = 19」 có gửi cho 得意先 trên Order đúng không?",
+      "trường hợp 「販売部門 <> 19」 có lấy mail theo 部署中分類 đúng không?"
+    ],
+    "must_contain": ["販売部門 = 19", "販売部門 <> 19"],
+    "must_not_contain": ["nhóm đặc biệt", "bộ phận đặc thù"]
+  },
+  {
+    "id": "FIX-018",
+    "category": "multi_rule",
+    "module": "MA10",
+    "screen": "MA1030 出図実績入力",
+    "topic": "readable_case_split",
+    "difficulty": "medium",
+    "focus_label": "rule hiển thị button",
+    "source_reference": { "screen": "MA1030 出図実績入力", "lines": ["568", "584"] },
+    "input_context": "Phải chia trường hợp dễ đọc.",
+    "evidence": [
+      "Có hai rule button state tương ứng với hai trạng thái của checkbox."
+    ],
+    "current_understanding": [
+      "Rule hiển thị button khi check và khi không check là hai trường hợp tách biệt.",
+      "Nếu trình bày thành từng trường hợp riêng, khách hàng sẽ dễ xác nhận hơn."
+    ],
+    "unclear_points": [
+      "Chưa rõ khi đổi trạng thái checkbox có cần thực hiện search lại hay không."
+    ],
+    "confirmation_points": [
+      "trường hợp khi check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột dành cho đối tượng 取戻 đúng không?",
+      "trường hợp khi không check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột trạng thái thông thường đúng không?"
+    ],
+    "must_contain": ["Trường hợp", "取戻対象表示"],
+    "must_not_contain": ["■", "một đoạn dài duy nhất"]
+  },
+  {
+    "id": "FIX-019",
+    "category": "mapping",
+    "module": "EA10",
+    "screen": "EA1044",
+    "topic": "ab_choice",
+    "difficulty": "medium",
+    "focus_label": "item 月 trong EA1044",
+    "source_reference": { "screen": "EA1044" },
+    "input_context": "QA có lựa chọn A/B cho item 月.",
+    "evidence": [
+      "Item 月 chưa rõ đang thể hiện tháng giao dịch, tháng xử lý hay tháng xuất CSV."
+    ],
+    "current_understanding": [
+      "Item 月 là một giá trị nghiệp vụ cần được chốt rõ nguồn ý nghĩa trước khi mapping output."
+    ],
+    "unclear_points": [
+      "Chưa rõ item 月 thể hiện thời điểm nào."
+    ],
+    "confirmation_points": [
+      "item 月 thể hiện tháng phát sinh giao dịch hay tháng xử lý dữ liệu?",
+      "nếu không phải hai cách hiểu trên thì item 月 có đang thể hiện tháng xuất CSV hay không?"
+    ],
+    "must_contain": ["tháng phát sinh giao dịch", "tháng xử lý", "tháng xuất CSV"],
+    "must_not_contain": ["■", "database"]
+  },
+  {
+    "id": "FIX-020",
+    "category": "exception_case",
+    "module": "FA30",
+    "screen": "FA3020",
+    "topic": "customer_ready_wording",
+    "difficulty": "medium",
+    "focus_label": "điều kiện xác định 完了 và 未完了",
+    "source_reference": { "screen": "FA3020" },
+    "input_context": "QA phải có thể gửi khách hàng ngay.",
+    "evidence": [
+      "FA3020 cần đưa 再手配 chưa hoàn thành lên trên.",
+      "Tài liệu chưa nêu rõ điều kiện phân biệt 完了 và 未完了."
+    ],
+    "current_understanding": [
+      "Các record 「再手配」 chưa hoàn thành sẽ được ưu tiên hiển thị ở phía trên để người dùng dễ theo dõi.",
+      "Trong nhóm record chưa hoàn thành, dữ liệu sẽ được sắp xếp theo 「計画納期」."
+    ],
+    "unclear_points": [
+      "Chưa rõ điều kiện xác định trạng thái 完了 và 未完了."
+    ],
+    "confirmation_points": [
+      "việc xác định trạng thái hoàn thành có dựa vào item 「完納区分」 hay không?",
+      "nếu không dựa vào 「完納区分」 thì item hoặc điều kiện nào sẽ được sử dụng để phân biệt 完了 và 未完了?"
+    ],
+    "must_contain": ["Nhờ Bác", "再手配", "完納区分"],
+    "must_not_contain": ["■ Bối cảnh", "phiền bác mô tả rõ hơn"]
+  }
+]
