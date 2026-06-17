@@ -1,0 +1,187 @@
+﻿{
+    "total":  20,
+    "passed":  20,
+    "failed":  0,
+    "details":  [
+                    {
+                        "id":  "FIX-001",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến phần 検索結果 được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi muốn xác nhận nhận thức như sau:\n\n1. Về nguồn tham chiếu:\n\nChúng tôi đang hiểu màn hình này thống kê tình trạng hoặc tiến độ 作図・出図 theo từng 品目中分類.\nGiá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?\n\n2. Về rule mapping:\n\nChúng tôi đang hiểu màn hình này thống kê tình trạng hoặc tiến độ 作図・出図 theo từng 品目中分類.\nGiá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?\n\n\nNhờ Bác xác nhận giúp chúng tôi các nội dung trên."
+                    },
+                    {
+                        "id":  "FIX-002",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến đối tượng nhận email được mô tả tại line 467-469 của màn hình 新規 作図実績（NEW） của sheet MA10, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. 販売部門 được xác định bằng cách tham chiếu item 「室コード」 tại màn hình CA3020.\n2. Trường hợp 「販売部門 = 19」 thì đối tượng nhận thông báo là 「得意先」 được đăng ký trên Order.\n3. Trường hợp 「販売部門 \u003c\u003e 19」 thì hệ thống tham chiếu Master Bộ phận nhận（部署中分類）để xác định địa chỉ email tương ứng.\n4. Chưa rõ Master Bộ phận nhận（部署中分類）có được tạo mới trong yêu cầu này hay không.\n\n5. Trường hợp cần xác nhận:\n   - Master Bộ phận nhận（部署中分類）sẽ được tạo mới trong yêu cầu phát triển lần này đúng không?\n\n6. Trường hợp 「販売部門 \u003c\u003e 19」:\n   - trường hợp 「販売部門 \u003c\u003e 19」 có cần gửi đồng thời cho 得意先 hay chỉ gửi cho địa chỉ email lấy từ 部署中分類?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-003",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến điều kiện search 「取戻対象表示」 được mô tả tại line 568, 584 của màn hình MA1030 出図実績入力, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Khi người dùng check vào checkbox 「取戻対象表示」, trạng thái các button trên màn hình sẽ hiển thị theo cột 「Khi check hiển thị đối tượng 取戻」 được mô tả tại line 584.\n2. Khi người dùng không check vào checkbox 「取戻対象表示」, trạng thái các button sẽ hiển thị theo cột 「Trạng thái thông thường」 được mô tả tại line 584.\n3. Chưa rõ khi đổi trạng thái checkbox có cần refresh lại toàn bộ kết quả search hay chỉ đổi trạng thái button.\n\n4. khi người dùng check vào checkbox 「取戻対象表示」 thì trạng thái button sẽ bám theo cột 「Khi check hiển thị đối tượng 取戻」 đúng không?\n\n5. khi người dùng không check vào checkbox 「取戻対象表示」 thì trạng thái button sẽ bám theo cột 「Trạng thái thông thường」 đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-004",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến các item CSV output của EA1044 được mô tả tại màn hình EA1044, chúng tôi muốn xác nhận nhận thức như sau:\n\n1. Về item output:\n\nChúng tôi chưa xác định được item 得意先ﾚｰﾄ được lấy từ thông tin rate trong master khách hàng hay từ dữ liệu giao dịch.\nChúng tôi đang hiểu item 得意先FAX番号 có thể được lấy từ số FAX đăng ký trong master khách hàng.\nChúng tôi chưa rõ item 月 thể hiện tháng phát sinh giao dịch, tháng xử lý hay tháng xuất CSV.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. nguồn tham chiếu của item 得意先ﾚｰﾄ là thông tin rate trong master khách hàng hay dữ liệu giao dịch?\n2. item 得意先FAX番号 có được lấy từ số FAX đăng ký trong master khách hàng đúng không?\n\n2. Về nguồn dữ liệu và rule hiển thị:\n\nChúng tôi chưa xác định được item 得意先ﾚｰﾄ được lấy từ thông tin rate trong master khách hàng hay từ dữ liệu giao dịch.\nChúng tôi đang hiểu item 得意先FAX番号 có thể được lấy từ số FAX đăng ký trong master khách hàng.\nChúng tôi chưa rõ item 月 thể hiện tháng phát sinh giao dịch, tháng xử lý hay tháng xuất CSV.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. item 月 thể hiện tháng phát sinh giao dịch, tháng xử lý hay tháng xuất CSV?\n\n\nNhờ Bác xác nhận giúp chúng tôi các nội dung trên."
+                    },
+                    {
+                        "id":  "FIX-005",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến phần 「再手配分」 ở block 「手配情報」 được mô tả tại màn hình FA3020, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Các record 「再手配」 chưa hoàn thành sẽ được ưu tiên hiển thị ở phía trên để người dùng dễ theo dõi.\n2. Trong nhóm record 「再手配」 chưa hoàn thành, dữ liệu sẽ được sắp xếp theo 「計画納期」.\n3. Chưa xác định được điều kiện dùng để phân biệt record đã hoàn thành và chưa hoàn thành.\n\n4. Trường hợp 「完納区分」:\n   - việc xác định trạng thái hoàn thành có dựa vào item 「完納区分」 hay không?\n\n5. Trường hợp 「完納区分」:\n   - nếu không dựa vào 「完納区分」 thì item hoặc điều kiện nào sẽ được sử dụng để phân biệt 完了 và 未完了?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-006",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến nhóm 品目中分類 được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Màn hình đang thống kê kết quả theo từng 品目中分類.\n2. Để hiển thị ổn định, hệ thống cần có nguồn master hoặc quy tắc xác định rõ ràng cho 品目中分類.\n3. Chưa rõ 品目中分類 được tham chiếu từ master nào.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-007",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến giá trị hiển thị trong từng ô của bảng kết quả được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Giá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó.\n2. Chưa rõ đơn vị thống kê là 件数 hay 製番.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-008",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến đối tượng nhận email được mô tả tại line 467-469 của màn hình 新規 作図実績（NEW） của sheet MA10, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Đối tượng nhận email được tách theo từng điều kiện của 販売部門.\n2. Trường hợp 「販売部門 = 19」 thì gửi cho 「得意先」 trên Order.\n3. Trường hợp 「販売部門 \u003c\u003e 19」 thì tham chiếu Master Bộ phận nhận để lấy địa chỉ email.\n4. Chưa rõ rule khi Master Bộ phận nhận chưa có dữ liệu email.\n\n5. Trường hợp 「販売部門 = 19」:\n   - trường hợp 「販売部門 = 19」 có chỉ gửi cho 得意先 trên Order đúng không?\n\n6. Trường hợp 「販売部門 \u003c\u003e 19」:\n   - trường hợp 「販売部門 \u003c\u003e 19」 có chỉ tham chiếu địa chỉ email từ 部署中分類 đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-009",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến checkbox 「取戻対象表示」 được mô tả tại line 568, 584 của màn hình MA1030 出図実績入力, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Khi check vào checkbox, màn hình hiển thị trạng thái button theo cột dành cho đối tượng 取戻.\n2. Khi không check, màn hình hiển thị trạng thái button theo cột trạng thái thông thường.\n3. Chưa rõ khi chuyển đổi checkbox có cần search lại dữ liệu hay không.\n\n4. khi check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột 「Khi check hiển thị đối tượng 取戻」 đúng không?\n\n5. khi không check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột 「Trạng thái thông thường」 đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-010",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến các item output chưa rõ nguồn của EA1044 được mô tả tại màn hình EA1044, chúng tôi muốn xác nhận nhận thức như sau:\n\n1. Về item output:\n\nChúng tôi đang tách riêng từng item để tránh hiểu nhầm nguồn dữ liệu.\nMỗi item có khả năng tham chiếu từ nguồn khác nhau nên cần xác nhận riêng từng trường hợp.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. nguồn của item 得意先ﾚｰﾄ là từ master khách hàng hay dữ liệu giao dịch?\n2. item 得意先FAX番号 có lấy từ số FAX trong master khách hàng đúng không?\n\n2. Về nguồn dữ liệu và rule hiển thị:\n\nChúng tôi đang tách riêng từng item để tránh hiểu nhầm nguồn dữ liệu.\nMỗi item có khả năng tham chiếu từ nguồn khác nhau nên cần xác nhận riêng từng trường hợp.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. item 月 thể hiện tháng giao dịch, tháng xử lý hay tháng xuất CSV?\n\n\nNhờ Bác xác nhận giúp chúng tôi các nội dung trên."
+                    },
+                    {
+                        "id":  "FIX-011",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến rule thay đổi trạng thái button được mô tả tại line 568, 584 của màn hình MA1030 出図実績入力, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Checkbox mới chỉ ảnh hưởng đến trạng thái button chứ không làm thay đổi dữ liệu nghiệp vụ gốc.\n2. Rule hiển thị khi check và khi không check được mô tả tách biệt trong tài liệu.\n3. Để người dùng dễ hiểu, hai trường hợp cần được xác nhận riêng thay vì gộp vào một câu dài.\n4. Chưa rõ có cần refresh lại search result khi đổi checkbox hay không.\n\n5. khi check vào checkbox thì màn hình chỉ đổi trạng thái button, không đổi dữ liệu gốc đúng không?\n\n6. khi không check thì hệ thống quay lại rule hiển thị button thông thường đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-012",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến phạm vi xử lý của MA1032 được mô tả tại màn hình MA1032, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Nếu không có chỉ thị khác, MA1032 sẽ giữ nguyên xử lý hiện tại.\n2. Chỉ những thay đổi bắt buộc do dữ liệu upstream đổi cấu trúc mới cần được xem xét.\n3. Chưa rõ MA1032 có nằm ngoài phạm vi thay đổi của đợt này hoàn toàn hay không.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. MA1032 có nằm ngoài phạm vi thay đổi của lần này đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-013",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến phần 検索結果 được mô tả tại line 659 của màn hình 作図・出図状況一覧 của sheet MA10, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. QA cần giữ nguyên các thuật ngữ Nhật quan trọng để tránh lệch nghiệp vụ.\n2. Phần diễn giải xung quanh vẫn nên dùng tiếng Việt tự nhiên để khách hàng dễ theo dõi.\n3. Chưa rõ nguồn của 品目中分類.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-014",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến phần 検索結果 được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Nội dung cần xác nhận hiện chỉ giới hạn trong phần 検索結果 của 作図・出図状況一覧.\n2. Chưa rõ nguồn của 品目中分類.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. các giá trị 品目中分類 được tham chiếu từ master hoặc thông tin nào?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-015",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến giá trị thống kê trong từng ô được mô tả tại line 659 của màn hình 作図・出図状況一覧, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Giá trị hiển thị trong từng ô là số lượng đối tượng đang thuộc trạng thái tương ứng tại ngày đó.\n2. Chưa rõ đơn vị thống kê là 件数 hay 製番.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. đơn vị thống kê trong từng ô là số lượng record（件数） hay số lượng 製番?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-016",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến phạm vi KEEP của MA1032 được mô tả tại màn hình MA1032, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Nếu không có chỉ thị khác, MA1032 sẽ giữ nguyên xử lý hiện tại.\n2. Chưa rõ có cần design riêng cho MA1032 hay không.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. MA1032 có thể được treat là KEEP và không cần design riêng đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-017",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến đối tượng nhận email được mô tả tại line 467-469 của màn hình 新規 作図実績（NEW） của sheet MA10, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Đối tượng nhận email được chia theo đúng từng điều kiện nghiệp vụ đang có trong tài liệu.\n2. Không nên đổi cách diễn đạt của điều kiện sang một nhóm khái niệm chung khác.\n3. Chưa rõ khi 販売部門 \u003c\u003e 19 nhưng không tìm thấy mail trong 部署中分類 thì xử lý như thế nào.\n\n4. Trường hợp 「販売部門 = 19」:\n   - trường hợp 「販売部門 = 19」 có gửi cho 得意先 trên Order đúng không?\n\n5. Trường hợp 「販売部門 \u003c\u003e 19」:\n   - trường hợp 「販売部門 \u003c\u003e 19」 có lấy mail theo 部署中分類 đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-018",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến rule hiển thị button được mô tả tại line 568, 584 của màn hình MA1030 出図実績入力, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Rule hiển thị button khi check và khi không check là hai trường hợp tách biệt.\n2. Nếu trình bày thành từng trường hợp riêng, khách hàng sẽ dễ xác nhận hơn.\n3. Chưa rõ khi đổi trạng thái checkbox có cần thực hiện search lại hay không.\n\n4. trường hợp khi check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột dành cho đối tượng 取戻 đúng không?\n\n5. trường hợp khi không check vào checkbox 「取戻対象表示」 thì hệ thống áp dụng rule của cột trạng thái thông thường đúng không?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    },
+                    {
+                        "id":  "FIX-019",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến item 月 trong EA1044 được mô tả tại màn hình EA1044, chúng tôi muốn xác nhận nhận thức như sau:\n\n1. Về nguồn tham chiếu:\n\nItem 月 là một giá trị nghiệp vụ cần được chốt rõ nguồn ý nghĩa trước khi mapping output.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. item 月 thể hiện tháng phát sinh giao dịch hay tháng xử lý dữ liệu?\n\n2. Về rule mapping:\n\nItem 月 là một giá trị nghiệp vụ cần được chốt rõ nguồn ý nghĩa trước khi mapping output.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. nếu không phải hai cách hiểu trên thì item 月 có đang thể hiện tháng xuất CSV hay không?\n\n\nNhờ Bác xác nhận giúp chúng tôi các nội dung trên."
+                    },
+                    {
+                        "id":  "FIX-020",
+                        "passed":  true,
+                        "score":  10,
+                        "issues":  [
+
+                                   ],
+                        "qa":  "Liên quan đến điều kiện xác định 完了 và 未完了 được mô tả tại màn hình FA3020, chúng tôi đang hiểu nghiệp vụ như sau:\n\n1. Các record 「再手配」 chưa hoàn thành sẽ được ưu tiên hiển thị ở phía trên để người dùng dễ theo dõi.\n2. Trong nhóm record chưa hoàn thành, dữ liệu sẽ được sắp xếp theo 「計画納期」.\n3. Chưa rõ điều kiện xác định trạng thái 完了 và 未完了.\n\nNhờ Bác xác nhận thêm giúp các điểm sau:\n1. việc xác định trạng thái hoàn thành có dựa vào item 「完納区分」 hay không?\n2. nếu không dựa vào 「完納区分」 thì item hoặc điều kiện nào sẽ được sử dụng để phân biệt 完了 và 未完了?\n\nNhờ Bác xác nhận giúp cách hiểu trên có đúng không ạ?"
+                    }
+                ]
+}

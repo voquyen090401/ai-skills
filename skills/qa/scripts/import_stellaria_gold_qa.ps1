@@ -1,13 +1,30 @@
-﻿param(
-    [string]$SourcePath = "C:\Users\User\.codex\attachments\b330f87b-7dbe-4be6-a619-6cac12cd728e\pasted-text.txt",
-    [string]$DatasetPath = "D:\Workscpace\AISkill\skills\qa\references\gold_dataset.jsonl",
-    [string]$ReportPath = "D:\Workscpace\AISkill\STELLARIA_GOLD_QA_IMPORT_REPORT.md"
+﻿[CmdletBinding()]
+param(
+    [string]$SourcePath = "",
+    [string]$DatasetPath = "",
+    [string]$ReportPath = ""
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 . "$PSScriptRoot\qa_skill_lib.ps1"
+
+if (-not $DatasetPath) {
+    $DatasetPath = Get-QaDatasetPath
+}
+if (-not $ReportPath) {
+    $ReportPath = Get-QaOutputPath -ChildPath "stellaria_gold_qa_import_report.md"
+}
+if (-not $SourcePath) {
+    Write-QaLog -Level "ERROR" -Message "SourcePath is required."
+    exit 2
+}
+if (-not (Test-Path -LiteralPath $SourcePath)) {
+    Write-QaLog -Level "ERROR" -Message "Source file not found: $SourcePath"
+    exit 2
+}
+
 
 function Get-SplitSegments {
     param([string]$Text)

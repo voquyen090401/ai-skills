@@ -1,213 +1,206 @@
 # QA Skill Analysis
 
-## Scope
+## A. Current-state analysis
 
-Files read in `skills/qa/`:
+### Entry points
 
-- `SKILL.md`
-- `agents/openai.yaml`
-- `references/gold_dataset.jsonl`
-- `references/gold_dataset.backup-before-stellaria.jsonl`
-- `references/output-template.md`
-- `references/qa-groups.md`
 - `scripts/build_prompt_bundle.ps1`
-- `scripts/export_qa_skill_report.ps1`
-- `scripts/import_stellaria_gold_qa.ps1`
-- `scripts/qa_skill_lib.ps1`
-- `scripts/regenerate_brse_investigation_dataset.ps1`
+- `scripts/validate_qa_skill.ps1`
 - `scripts/run_qa_skill_tests.ps1`
 - `scripts/update_qa_snapshots.ps1`
-- `scripts/validate_qa_skill.ps1`
-- `tests/fixtures.json`
-- `tests/snapshots.json`
-
-## Current File Roles
-
-- `SKILL.md`
-  Documents the business intent and output expectations of the QA skill.
-- `agents/openai.yaml`
-  Stores a short default prompt for the agent, but duplicates several rules already written in `SKILL.md`.
-- `references/output-template.md`
-  Defines accepted QA shapes, openings, closings, and hard avoids.
-- `references/qa-groups.md`
-  Defines category selection rules.
-- `references/gold_dataset.jsonl`
-  Current runtime gold dataset with 104 JSONL records.
-- `references/gold_dataset.backup-before-stellaria.jsonl`
-  A point-in-time backup created by the Stellaria import flow. This is not runtime data and should not be treated as a normal reference file.
-- `scripts/qa_skill_lib.ps1`
-  Real logic center of the skill. It contains legacy conversion, QA formatting, and QA content validation rules.
-- `scripts/build_prompt_bundle.ps1`
-  Builds a prompt bundle from template, groups, input, and a few dataset examples.
-- `scripts/validate_qa_skill.ps1`
-  Validates dataset content only. It does not yet validate file structure, markdown structure, script conventions, or duplicate helper definitions.
-- `scripts/run_qa_skill_tests.ps1`
-  Rebuilds QA from fixtures and compares against validation rules plus snapshots.
-- `scripts/update_qa_snapshots.ps1`
-  Recomputes and overwrites snapshots immediately with no confirmation flag.
+- `scripts/import_gold_qa.ps1`
 - `scripts/regenerate_brse_investigation_dataset.ps1`
-  Converts or rewrites dataset records. Current interface is risky because it can rewrite the gold dataset directly with `-RewriteGoldDataset`.
 - `scripts/export_qa_skill_report.ps1`
-  Generates a historical-style report and examples, but the report content is partly hard-coded to a previous migration story.
 - `scripts/import_stellaria_gold_qa.ps1`
-  A specialized one-off importer for Stellaria content. It is useful evidence, but too specific to serve as the general gold QA import flow requested by the user.
-- `tests/fixtures.json`
-  Contains structured fixture input plus lightweight content assertions.
-- `tests/snapshots.json`
-  Contains exact QA snapshots for the fixtures.
 
-## Current Runtime Flow
+### Main flows before refactor
 
-Observed runtime flow today:
+- Prompt construction loaded `SKILL.md`, `references/output-template.md`, `references/qa-groups.md`, and `references/gold_dataset.jsonl`, then built a few-shot bundle.
+- Runtime QA generation, legacy record normalization, dataset statistics, validation, markdown checks, path resolution, and script inspection were all concentrated in `scripts/qa_skill_lib.ps1`.
+- Regression tests built QA from `tests/fixtures.json`, validated the output, and compared with `tests/snapshots.json`.
+- Dataset update used two paths:
+  - `import_gold_qa.ps1` for generic free-text or JSONL import.
+  - `import_stellaria_gold_qa.ps1` for a specialized one-off Stellaria migration flow.
 
-1. `openai.yaml` provides a default prompt.
-2. `SKILL.md` is available to the skill framework, but `build_prompt_bundle.ps1` does not read it.
-3. `build_prompt_bundle.ps1` reads:
-   - `references/output-template.md`
-   - `references/qa-groups.md`
-   - `references/gold_dataset.jsonl`
-   - user input file
-4. The bundle order today is:
-   - Output Rules
-   - QA Group Rules
-   - Input
-   - Few-shot Examples
-5. The few-shot selection is naive:
-   - exact regex match on `topic`
-   - otherwise first `N` records from the dataset
+### Issues observed from code
 
-Key finding:
+- `scripts/qa_skill_lib.ps1` held too many responsibilities: path/config, IO, prompt bundling, QA generation, dataset helpers, validation, and script parsing.
+- `import_stellaria_gold_qa.ps1` used absolute machine-specific defaults.
+- Validation previously reasoned about `scripts/*.ps1` only, so deeper modularization would not be inspected unless the validator changed with it.
+- Docs described a partially outdated architecture and no longer matched the real code paths.
+- Backup/runtime/reference responsibilities were clear in intent but not clearly reflected in the internal module structure.
 
-- `build_prompt_bundle.ps1` does not load `SKILL.md`, so the current bundle misses the skill purpose, governance wording, stop conditions, and workflow guidance.
-- `openai.yaml` does not call `build_prompt_bundle.ps1`; it only carries a short static prompt.
+### Risks before refactor
 
-## Current Test Flow
+- Harder maintenance because unrelated changes landed in one large library file.
+- Higher chance of accidental breakage because path, generation, and validation logic were tightly coupled.
+- Poor extensibility for adding new validator rules, generation rules, or dataset behaviors without growing the same file further.
 
-Observed test flow today:
+## B. Architecture decisions
 
-1. `run_qa_skill_tests.ps1` reads `fixtures.json`.
-2. It builds synthetic records from fixture fields.
-3. It generates `qa` using `Build-QAText` from `qa_skill_lib.ps1`.
-4. It validates each generated QA with `Get-QAValidationResult`.
-5. It checks `must_contain` and `must_not_contain`.
-6. It compares exact text with `snapshots.json` when a snapshot exists.
-7. It writes a JSON report and exits `1` on failures.
+### Principles used
 
-Current status before refactor:
+- Keep public command paths stable.
+- Move reusable logic behind focused modules instead of moving behavior into new wrappers.
+- Keep PowerShell and current runtime behavior.
+- Do not introduce empty abstraction layers or duplicate implementations.
 
-- `validate_qa_skill.ps1`: PASS
-- `run_qa_skill_tests.ps1`: PASS (`20/20`)
+### New structure
 
-## Current Dataset Update Flow
+```text
+scripts/
+|-- qa_skill_lib.ps1
+`-- modules/
+    |-- qa_runtime.ps1
+    |-- qa_prompt_bundle.ps1
+    |-- qa_dataset.ps1
+    |-- qa_generation.ps1
+    `-- qa_validation.ps1
+```
 
-There are currently two update-related flows:
+### Responsibility rules
 
-1. `regenerate_brse_investigation_dataset.ps1`
-   - reads an input dataset
-   - converts legacy or normalizes current records
-   - can write to a separate output file
-   - can also rewrite the main gold dataset directly with `-RewriteGoldDataset`
+- `qa_runtime.ps1`
+  - Allowed: root resolution, path helpers, required-file inventory, file IO, logging.
+  - Not allowed: QA business rules, validation rules, prompt assembly logic.
+- `qa_prompt_bundle.ps1`
+  - Allowed: example selection and prompt bundle assembly.
+  - Not allowed: dataset mutation or QA validation.
+- `qa_dataset.ps1`
+  - Allowed: dataset statistics, fixture mapping, schema-level record checks.
+  - Not allowed: prompt assembly or script inspection.
+- `qa_generation.ps1`
+  - Allowed: QA formatting, opening selection, grouping, normalization of legacy/current records.
+  - Not allowed: filesystem concerns or command-line orchestration.
+- `qa_validation.ps1`
+  - Allowed: QA validation, markdown validation, script parsing checks, full validation report assembly.
+  - Not allowed: prompt bundle construction or dataset writes.
+- `qa_skill_lib.ps1`
+  - Allowed: compatibility loading only.
+  - Not allowed: new business logic.
 
-2. `import_stellaria_gold_qa.ps1`
-   - reads a fixed external attachment path
-   - creates a backup automatically
-   - derives multiple records with custom parsing logic
-   - appends to `gold_dataset.jsonl`
-   - writes a custom report
+### Patterns used
 
-Key findings:
+- Loader compatibility layer for old script imports.
+- Shared runtime/path module.
+- Focused service-style modules grouped by business responsibility.
 
-- There is no generic `import_gold_qa.ps1` yet.
-- One script can rewrite the gold dataset directly.
-- The Stellaria importer uses absolute paths and task-specific parsing rules.
-- Backup files now live under `references/`, so the validator should explicitly avoid treating them as runtime dataset.
+### Patterns intentionally not used
 
-## Duplicated Logic
+- No large class hierarchy.
+- No separate CLI framework.
+- No duplicated old/new implementation tree.
 
-Repeated patterns already visible:
+## C. Final directory tree
 
-- path construction and absolute default paths across nearly every script
-- repeated `Get-Content ... | ConvertFrom-Json`
-- repeated report directory creation
-- repeated fixture-to-record mapping in:
+```text
+skills/qa/
+|-- agents/
+|   `-- openai.yaml
+|-- references/
+|   |-- README.md
+|   |-- gold_dataset.jsonl
+|   |-- gold_dataset.backup-before-stellaria.jsonl
+|   |-- output-template.md
+|   `-- qa-groups.md
+|-- scripts/
+|   |-- build_prompt_bundle.ps1
+|   |-- export_qa_skill_report.ps1
+|   |-- import_gold_qa.ps1
+|   |-- import_stellaria_gold_qa.ps1
+|   |-- qa_skill_lib.ps1
+|   |-- regenerate_brse_investigation_dataset.ps1
+|   |-- run_qa_skill_tests.ps1
+|   |-- update_qa_snapshots.ps1
+|   |-- validate_qa_skill.ps1
+|   `-- modules/
+|       |-- qa_dataset.ps1
+|       |-- qa_generation.ps1
+|       |-- qa_prompt_bundle.ps1
+|       |-- qa_runtime.ps1
+|       `-- qa_validation.ps1
+|-- tests/
+|   |-- README.md
+|   |-- fixtures.json
+|   `-- snapshots.json
+|-- QA_SKILL_ANALYSIS.md
+|-- README.md
+`-- SKILL.md
+```
+
+## D. Migration summary
+
+| Old file | New file | Change | Why |
+| -------- | -------- | ------ | --- |
+| `scripts/qa_skill_lib.ps1` | `scripts/qa_skill_lib.ps1` | keep as loader | preserve every existing script import path |
+| `scripts/qa_skill_lib.ps1` | `scripts/modules/qa_runtime.ps1` | extract | isolate path/config/IO logic |
+| `scripts/qa_skill_lib.ps1` | `scripts/modules/qa_prompt_bundle.ps1` | extract | isolate prompt-bundle logic |
+| `scripts/qa_skill_lib.ps1` | `scripts/modules/qa_dataset.ps1` | extract | isolate dataset statistics and fixture/schema helpers |
+| `scripts/qa_skill_lib.ps1` | `scripts/modules/qa_generation.ps1` | extract | isolate QA generation and normalization |
+| `scripts/qa_skill_lib.ps1` | `scripts/modules/qa_validation.ps1` | extract | isolate QA and script validation/report logic |
+| `scripts/import_stellaria_gold_qa.ps1` | `scripts/import_stellaria_gold_qa.ps1` | keep and harden | keep the specialized flow but remove machine-specific path defaults |
+
+## E. Functional changes
+
+### Structure-only changes
+
+- Split the large shared library into focused modules.
+- Kept public script names and call patterns unchanged.
+
+### Internal changes with preserved behavior
+
+- `qa_skill_lib.ps1` now loads focused modules instead of containing all logic directly.
+- Validation now scans the module files as part of script parsing/inspection.
+- QA root resolution now works from the module location rather than assuming the old single-file layout.
+
+### Intentional behavior changes
+
+- `import_stellaria_gold_qa.ps1` no longer defaults to machine-specific absolute paths.
+- Missing `SourcePath` for the Stellaria importer now fails explicitly instead of silently assuming an attachment path from one developer machine.
+
+### Safety-focused additions
+
+- Module files are treated as first-class required runtime assets by the validator.
+- Script discovery now recurses under `scripts/` so validation keeps covering the new modular layout.
+
+## F. Compatibility
+
+- Existing public commands kept the same paths:
+  - `validate_qa_skill.ps1`
   - `run_qa_skill_tests.ps1`
   - `update_qa_snapshots.ps1`
-- repeated UTF-8 BOM writing
-- repeated dataset loading and writing
+  - `build_prompt_bundle.ps1`
+  - `import_gold_qa.ps1`
+  - `regenerate_brse_investigation_dataset.ps1`
+  - `export_qa_skill_report.ps1`
+- Existing dot-source import path stayed the same:
+  - `scripts/qa_skill_lib.ps1`
+- No breaking change was introduced to the runtime gold dataset schema.
 
-## Rule Conflicts And Overlap
+## G. Verification result
 
-Current overlap exists between:
+### Commands run
 
-- `SKILL.md`
-- `agents/openai.yaml`
-- `references/output-template.md`
-- `qa_skill_lib.ps1`
+```powershell
+./skills/qa/scripts/validate_qa_skill.ps1
+./skills/qa/scripts/run_qa_skill_tests.ps1
+```
 
-Examples:
+### Results
 
-- "do not use old headings" appears in both prompt docs and validation logic
-- "do not invent CSV/batch/API/DB/master/authority/phase details" appears in `SKILL.md`, `openai.yaml`, and indirectly in validator rules
-- opening and closing expectations are expressed in both docs and machine validation
+- Validation: PASS
+- Regression tests: PASS
+- Test count: `20`
+- Passed tests: `20`
+- Failed tests: `0`
 
-Recommended source of truth:
+### Manual checks
 
-- skill behavior and governance: `SKILL.md`
-- QA format and examples: `references/output-template.md`
-- category taxonomy: `references/qa-groups.md`
-- machine checks: `scripts/validate_qa_skill.ps1` and shared validation helpers
+- Confirmed module path resolution works from the new `scripts/modules/` location.
+- Confirmed the validator still inspects scripts after modularization.
+- Confirmed the Stellaria importer no longer carries absolute default paths.
 
-## Notable Weak Points
+## H. Remaining issues
 
-- `build_prompt_bundle.ps1` does not read `SKILL.md`
-- `openai.yaml` duplicates behavior instead of staying lightweight
-- every main script uses hard-coded absolute paths
-- scripts do not consistently use `[CmdletBinding()]`
-- log format is inconsistent and not standardized
-- exit code `2` for invalid arguments is not implemented
-- `update_qa_snapshots.ps1` overwrites snapshots without confirmation
-- `validate_qa_skill.ps1` validates content only, not overall skill structure
-- `export_qa_skill_report.ps1` contains outdated hard-coded narrative about a previous migration
-- `import_stellaria_gold_qa.ps1` is highly task-specific and not reusable as the general import entry point
-
-## Deprecated Or Specialized Candidates
-
-- `scripts/import_stellaria_gold_qa.ps1`
-  Reason:
-  - useful as a one-off migration artifact
-  - not suitable as the primary import tool because it hard-codes source assumptions and absolute attachment paths
-
-Potential follow-up:
-
-- keep it for traceability, but document it as a specialized migration script
-
-## Proposed Changes
-
-1. Add a shared path and IO layer to `qa_skill_lib.ps1`.
-2. Refactor scripts to use relative paths resolved from the QA root instead of absolute machine paths.
-3. Make `build_prompt_bundle.ps1` read `SKILL.md` and emit a fixed, explicit bundle order:
-   - Skill role
-   - Core instructions
-   - QA category rules
-   - Output template
-   - Relevant gold examples
-   - User input
-4. Expand validation to cover:
-   - required files
-   - markdown sections
-   - JSONL correctness
-   - duplicate IDs
-   - category validity
-   - runtime dataset path safety
-   - script conventions
-5. Require an explicit confirmation flag for snapshot updates.
-6. Add a generic `scripts/import_gold_qa.ps1` with `-DryRun` and `-Apply`.
-7. Restrict dataset regeneration to safe modes by default and avoid direct gold overwrite unless explicitly requested.
-8. Add small `README.md` files so developers can understand the runtime/test/update flow without reading every script first.
-
-## Refactor Constraints
-
-- Keep the PowerShell-based implementation.
-- Keep current QA generation behavior stable unless a change is needed to meet the requested structure and safety requirements.
-- Do not remove existing gold records.
-- Do not move to a large new architecture.
+- `import_stellaria_gold_qa.ps1` is still a specialized migration script with a large amount of task-specific parsing logic. It is safer now, but it remains intentionally specialized rather than being turned into the default import path.
+- The generated report script can be expanded further if richer module-level reporting becomes necessary in future work.

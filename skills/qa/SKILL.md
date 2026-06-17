@@ -137,6 +137,7 @@ Primary commands:
 - update snapshots intentionally: `./skills/qa/scripts/update_qa_snapshots.ps1 -ConfirmUpdate`
 - import approved gold QA: `./skills/qa/scripts/import_gold_qa.ps1 -InputPath <file> -DryRun`
 - regenerate candidate dataset: `./skills/qa/scripts/regenerate_brse_investigation_dataset.ps1 -DryRun`
+- specialized Stellaria import: `./skills/qa/scripts/import_stellaria_gold_qa.ps1 -SourcePath <file>`
 
 ## Quality Gates
 

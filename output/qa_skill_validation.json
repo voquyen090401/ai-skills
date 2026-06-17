@@ -1,0 +1,1298 @@
+﻿{
+    "passed":  true,
+    "issues":  [
+
+               ],
+    "required_files":  [
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\SKILL.md",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\README.md",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\QA_SKILL_ANALYSIS.md",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\references\\gold_dataset.jsonl",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\references\\output-template.md",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\references\\qa-groups.md",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\references\\README.md",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\agents\\openai.yaml",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\build_prompt_bundle.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\export_qa_skill_report.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\import_gold_qa.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\import_stellaria_gold_qa.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\qa_skill_lib.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\regenerate_brse_investigation_dataset.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\run_qa_skill_tests.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\update_qa_snapshots.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\validate_qa_skill.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_runtime.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_prompt_bundle.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_dataset.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_generation.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_validation.ps1",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\tests\\fixtures.json",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\tests\\snapshots.json",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\tests\\README.md",
+                               "exists":  true
+                           }
+                       ],
+    "dataset_statistics":  {
+                               "total":  104,
+                               "needs_review":  2,
+                               "duplicate_ids":  [
+
+                                                 ],
+                               "duplicate_qa":  [
+
+                                                ],
+                               "by_category":  [
+                                                   {
+                                                       "name":  "api",
+                                                       "count":  4
+                                                   },
+                                                   {
+                                                       "name":  "batch",
+                                                       "count":  3
+                                                   },
+                                                   {
+                                                       "name":  "csv_output",
+                                                       "count":  6
+                                                   },
+                                                   {
+                                                       "name":  "database",
+                                                       "count":  5
+                                                   },
+                                                   {
+                                                       "name":  "display_label",
+                                                       "count":  7
+                                                   },
+                                                   {
+                                                       "name":  "exception_case",
+                                                       "count":  6
+                                                   },
+                                                   {
+                                                       "name":  "file_export",
+                                                       "count":  2
+                                                   },
+                                                   {
+                                                       "name":  "impact_investigation",
+                                                       "count":  4
+                                                   },
+                                                   {
+                                                       "name":  "import_csv",
+                                                       "count":  5
+                                                   },
+                                                   {
+                                                       "name":  "mapping",
+                                                       "count":  4
+                                                   },
+                                                   {
+                                                       "name":  "master_data",
+                                                       "count":  3
+                                                   },
+                                                   {
+                                                       "name":  "multi_rule",
+                                                       "count":  14
+                                                   },
+                                                   {
+                                                       "name":  "notification",
+                                                       "count":  4
+                                                   },
+                                                   {
+                                                       "name":  "permission",
+                                                       "count":  6
+                                                   },
+                                                   {
+                                                       "name":  "scope_keep",
+                                                       "count":  3
+                                                   },
+                                                   {
+                                                       "name":  "search_item",
+                                                       "count":  9
+                                                   },
+                                                   {
+                                                       "name":  "validation",
+                                                       "count":  5
+                                                   },
+                                                   {
+                                                       "name":  "version_conflict",
+                                                       "count":  4
+                                                   },
+                                                   {
+                                                       "name":  "workflow_gap",
+                                                       "count":  10
+                                                   }
+                                               ],
+                               "by_difficulty":  [
+                                                     {
+                                                         "name":  "high",
+                                                         "count":  55
+                                                     },
+                                                     {
+                                                         "name":  "medium",
+                                                         "count":  49
+                                                     }
+                                                 ],
+                               "by_module":  [
+                                                 {
+                                                     "name":  "FA10",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "MA10",
+                                                     "count":  67
+                                                 },
+                                                 {
+                                                     "name":  "STELLARIA",
+                                                     "count":  35
+                                                 }
+                                             ],
+                               "by_screen":  [
+                                                 {
+                                                     "name":  "Admin",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Cadii連携",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Course",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "FA1021",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "FA1030",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Lesson",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "MA10",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "MA1010",
+                                                     "count":  14
+                                                 },
+                                                 {
+                                                     "name":  "MA1011",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "MA1012",
+                                                     "count":  5
+                                                 },
+                                                 {
+                                                     "name":  "MA1020",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "MA1030",
+                                                     "count":  12
+                                                 },
+                                                 {
+                                                     "name":  "MA1032",
+                                                     "count":  4
+                                                 },
+                                                 {
+                                                     "name":  "MA1070",
+                                                     "count":  8
+                                                 },
+                                                 {
+                                                     "name":  "MA1072",
+                                                     "count":  3
+                                                 },
+                                                 {
+                                                     "name":  "MA10xx",
+                                                     "count":  6
+                                                 },
+                                                 {
+                                                     "name":  "Mail service",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "mapping table",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "My Page",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Nightly sync",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Organization",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "SA1040",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "SA1100",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "SFA連携",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Student",
+                                                     "count":  11
+                                                 },
+                                                 {
+                                                     "name":  "Students",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "Subject",
+                                                     "count":  4
+                                                 },
+                                                 {
+                                                     "name":  "TMS00090",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "レッスン",
+                                                     "count":  1
+                                                 },
+                                                 {
+                                                     "name":  "受講確認",
+                                                     "count":  2
+                                                 },
+                                                 {
+                                                     "name":  "成績確認",
+                                                     "count":  9
+                                                 },
+                                                 {
+                                                     "name":  "管理者",
+                                                     "count":  1
+                                                 }
+                                             ]
+                           },
+    "dataset_validation":  {
+                               "total":  104,
+                               "passed":  104,
+                               "failed":  0,
+                               "min_score":  10,
+                               "max_score":  10,
+                               "avg_score":  10,
+                               "details":  [
+                                               {
+                                                   "id":  "BI-QA-0001",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0002",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0003",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0004",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0071",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0072",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0073",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0086",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0087",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0088",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0096",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0097",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0098",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0099",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0131",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0132",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0133",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0134",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0166",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0167",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0168",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0169",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0216",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0217",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0218",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0219",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0251",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0252",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0253",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0254",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0255",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0296",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0297",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0298",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0299",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0331",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0332",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0333",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0334",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0361",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0362",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0363",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0386",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0387",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0388",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0389",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0406",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0407",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0408",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0409",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0426",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0427",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0428",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0441",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0442",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0443",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0456",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0457",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0458",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0466",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0467",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0468",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0476",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0477",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0478",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0486",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0487",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0488",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0489",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0490",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0491",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0492",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0493",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0494",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0495",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0496",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0497",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0498",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0499",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0500",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0501",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0502",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0503",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0504",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0505",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0506",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0507",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0508",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0509",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0510",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0511",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0512",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0513",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0514",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0515",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0516",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0517",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0518",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0519",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0520",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0521",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0522",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0523",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               },
+                                               {
+                                                   "id":  "BI-QA-0524",
+                                                   "passed":  true,
+                                                   "score":  10,
+                                                   "issues":  [
+
+                                                              ]
+                                               }
+                                           ]
+                           },
+    "schema_issues":  [
+
+                      ],
+    "script_results":  [
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\build_prompt_bundle.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\export_qa_skill_report.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\import_gold_qa.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\import_stellaria_gold_qa.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_dataset.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_generation.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_prompt_bundle.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_runtime.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\modules\\qa_validation.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\qa_skill_lib.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\regenerate_brse_investigation_dataset.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\run_qa_skill_tests.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\update_qa_snapshots.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           },
+                           {
+                               "path":  "D:\\Workspace\\AI\\ai-skills\\skills\\qa\\scripts\\validate_qa_skill.ps1",
+                               "parse_errors":  [
+
+                                                ],
+                               "imports_library":  true
+                           }
+                       ],
+    "duplicate_functions":  [
+
+                            ]
+}
