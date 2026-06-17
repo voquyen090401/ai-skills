@@ -1,7 +1,7 @@
 interface:
   display_name: "estimation"
-  short_description: "ERP breakdown at just-enough estimation granularity"
-  default_prompt: "Use $estimation to analyze the provided ERP documents and produce an evidence-based Big/Medium/Small task breakdown in Vietnamese at just-enough business granularity, not micro coding granularity, and output the result in the mandatory table with ProgramID, 機能区分, 機能名, Big, Medium, Small, Note, Type, and Complexity."
+  short_description: "ERP breakdown and evidence-based BE FE UT estimation"
+  default_prompt: "Use $estimation to analyze the provided ERP documents and produce an evidence-based ERP task breakdown table in Vietnamese. Keep Big at business or screen level, choose Medium as the main processing objective inside each Big, merge overlapping Medium items, group validation/API/mapping/loading/message/error handling into the corresponding action, treat all automatic screen-opening data loads as Khoi tao man hinh or Khoi tao du lieu, write Small as a short action sentence that directly describes the processed data or function, avoid listing API, field, mapping, function, loading, or message detail inside Small, and output the mandatory table with ProgramID, 機能区分, 機能名, Big, Medium, Small, Note, Type, Complexity, BE, FE, and UT. Estimate BE and FE from the actual changed objects, keep export CSV at FE = 0 unless the evidence shows frontend change, and use only numeric effort values or NOT ESTIMATED."
 
 policy:
   allow_implicit_invocation: true
